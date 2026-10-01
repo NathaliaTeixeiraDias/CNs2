@@ -31,12 +31,12 @@
     <!-- cadeado em forma de coração: começa fechado, abre quando a senha está certa -->
     <div class="cadeado" id="cadeado" aria-hidden="true">
       <svg viewBox="0 0 100 128" class="cadeado-svg">
-        <!-- a alça: gira em volta do ponto (35,38) quando o cadeado abre -->
-        <path id="alca" class="cadeado-alca"
-          d="M35,38 L35,30 C35,12 41,4 50,4 C59,4 65,12 65,30 L65,38"></path>
-        <!-- o corpo, em forma de coração -->
+        <!-- o corpo, em forma de coração (desenhado primeiro, fica por baixo) -->
         <path class="cadeado-corpo"
           d="M50,110.7 L43.6,104.9 C21,84.4 6,70.8 6,54.2 C6,40.6 16.6,30 30.2,30 C37.9,30 45.2,33.6 50,39.2 C54.8,33.6 62.1,30 69.8,30 C83.4,30 94,40.6 94,54.2 C94,70.8 79,84.4 56.4,105 L50,110.7 Z"></path>
+        <!-- a alça: desenhada depois, fica por cima do coração -->
+        <path id="alca" class="cadeado-alca"
+          d="M35,38 L35,30 C35,12 41,4 50,4 C59,4 65,12 65,30 L65,38"></path>
         <!-- a fechadura -->
         <circle class="cadeado-fechadura" cx="50" cy="64" r="8"></circle>
         <path class="cadeado-fechadura" d="M45,71 L55,71 L58,90 L42,90 Z"></path>
