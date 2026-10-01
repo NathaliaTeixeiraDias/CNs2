@@ -81,21 +81,19 @@ body {
    o transform-origin usar o espaço de coordenadas do próprio
    desenho (os mesmos números do "d" do path), em vez do espaço
    da página inteira. */
-
 .cadeado-alca {
   fill: none;
   stroke: var(--gold);
   stroke-width: 7;
   stroke-linecap: round;
+  stroke-linejoin: round;
   transform-box: fill-box;
-  /* Define o ponto de giro exatamente na perna esquerda da alça */
-  transform-origin: 15% 90%;
+  transform-origin: 100% 100%;
   transition: transform 1s cubic-bezier(.34, 1.56, .64, 1);
 }
 
-/* Agora o CSS pega a classe que o seu JS realmente envia (.aberta na alça) */
 .cadeado-alca.aberta {
-  transform: rotate(95deg);
+  transform: rotate(-115deg);
 }
 
 .cadeado-corpo {
