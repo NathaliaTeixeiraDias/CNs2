@@ -2,16 +2,34 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Portal Aberto</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>O Portal Aberto</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="imagens/favicon-32x32.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=EB+Garamond:ital@0;1&display=swap">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="pagina2.css">
 </head>
 <body>
-  <main class="portal">
-    <h1 class="titulo">O Portal se Abriu</h1>
-    <p class="subtitulo">(esta é só uma página de teste — o coração interativo vem na próxima etapa)</p>
+
+  <canvas id="c"></canvas>
+
+  <header>
+    <h1 class="titulo">Bem-vindo(a) ao outro lado do portal</h1>
+  </header>
+
+  <button id="btn">Pressione aqui</button>
+
+  <main>
+    <!-- some até o coração terminar de se formar -->
+    <nav id="nav-mensagens" hidden>
+      <p class="rotulo">Escolha um caminho:</p>
+      <ul>
+        <li><a href="mensagem1.html">Primeira mensagem</a></li>
+        <li><a href="mensagem2.html">Segunda mensagem</a></li>
+      </ul>
+    </nav>
   </main>
+
+  <script src="pagina2.js"></script>
 </body>
 </html>
