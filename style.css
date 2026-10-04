@@ -2,7 +2,7 @@
   --bg: #07060a;
   --roxo: #6b21a8;
   --roxo-claro: #a855f7;
-  --gold: #a9822f;
+  --gold: #d4af37;
   --bone: #e7e2d3;
   --danger: #8c3a3a;
 }
@@ -117,7 +117,7 @@ body {
 .titulo {
   font-family: 'Cinzel', serif;
   font-weight: 700;
-  font-size: clamp(24px, 5vw, 34px);
+  font-size: clamp(26px, 7vw, 38px);
   letter-spacing: .03em;
   margin-bottom: 10px;
 }
@@ -125,7 +125,7 @@ body {
 .subtitulo {
   font-style: italic;
   color: #b8b2a3;
-  font-size: 18px;
+  font-size: 20px;
   margin-bottom: 30px;
 }
 
@@ -139,8 +139,8 @@ body {
 
 .rotulo {
   font-family: 'Cinzel', serif;
-  font-size: 14px;
-  letter-spacing: .12em;
+  font-size: 16px;
+  letter-spacing: .1em;
   color: var(--gold);
 }
 
@@ -151,10 +151,10 @@ body {
   border: 1px solid rgba(169, 130, 47, .45);
   color: var(--bone);
   font-family: 'EB Garamond', serif;
-  font-size: 20px;
+  font-size: 22px;
   text-align: center;
-  letter-spacing: .2em;
-  padding: 15px 16px;
+  letter-spacing: .15em;
+  padding: 16px;
   border-radius: 2px;
   transition: border-color .25s, box-shadow .25s;
 }
@@ -177,12 +177,12 @@ body {
 
 .botao {
   margin-top: 6px;
-  padding: 16px 34px;
+  padding: 18px 36px;
   background: transparent;
   border: 1px solid var(--gold);
   color: var(--bone);
   font-family: 'Cinzel', serif;
-  font-size: 15px;
+  font-size: 17px;
   letter-spacing: .1em;
   cursor: pointer;
   transition: background .25s, color .25s, border-color .25s;
@@ -199,5 +199,5 @@ body {
   margin-top: 16px;
   color: var(--danger);
   font-style: italic;
-  font-size: 16px;
+  font-size: 17px;
 }
