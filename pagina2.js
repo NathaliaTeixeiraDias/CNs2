@@ -49,6 +49,29 @@ resize();
 // ---------- interação ----------
 const btn = document.getElementById("btn");
 const nav = document.getElementById("nav-mensagens");
+const bolhas = document.getElementById("bolhas");
+const modal = document.getElementById("modal-foto");
+const fotoGrande = document.getElementById("foto-grande");
+const fecharModal = document.getElementById("fechar-modal");
+
+// cada bolha, ao ser clicada, coloca sua foto (guardada no
+// atributo data-foto) dentro do <img> do modal e mostra o modal
+document.querySelectorAll(".bolha").forEach(bolha => {
+  bolha.addEventListener("click", () => {
+    fotoGrande.src = bolha.dataset.foto;
+    modal.hidden = false;
+    requestAnimationFrame(() => modal.classList.add("visivel"));
+  });
+});
+
+function fecharFoto() {
+  modal.classList.remove("visivel");
+  setTimeout(() => { modal.hidden = true; }, 300); // espera a transition acabar
+}
+fecharModal.addEventListener("click", fecharFoto);
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) fecharFoto(); // clicar fora da foto também fecha
+});
 
 let started = false, t0 = 0, rot = 0, startX = null, lastX = 0;
 
@@ -64,6 +87,7 @@ btn.addEventListener("click", () => {
   // antes de adicionar "visivel", pra garantir que a transition anime.
   setTimeout(() => {
     nav.hidden = false;
+    bolhas.hidden = false;
     requestAnimationFrame(() => nav.classList.add("visivel"));
   }, FORM_TIME * 1.4 * 1000);
 });

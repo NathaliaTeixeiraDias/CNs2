@@ -17,7 +17,7 @@
     <h1 class="titulo">Bem-vindo(a) ao outro lado do portal</h1>
   </header>
 
-  <button id="btn">Pressione aqui</button>
+  <button id="btn">Clique aqui</button>
 
   <main>
     <!-- some até o coração terminar de se formar -->
@@ -29,6 +29,20 @@
       </ul>
     </nav>
   </main>
+
+  <!-- bolhas flutuantes: cada uma abre uma foto ao ser clicada -->
+  <div id="bolhas" hidden>
+    <button class="bolha" style="--x:14%; --y:22%; --atraso:0s"   data-foto="imagens/foto1.jpg">💗</button>
+    <button class="bolha" style="--x:82%; --y:18%; --atraso:.6s"  data-foto="imagens/foto2.jpg">💗</button>
+    <button class="bolha" style="--x:10%; --y:60%; --atraso:1.1s" data-foto="imagens/foto3.jpg">💗</button>
+    <button class="bolha" style="--x:86%; --y:58%; --atraso:.3s"  data-foto="imagens/foto4.jpg">💗</button>
+  </div>
+
+  <!-- a janela que mostra a foto grande -->
+  <div id="modal-foto" class="modal" hidden>
+    <img src="">
+    <button id="fechar-modal" aria-label="Fechar">×</button>
+  </div>
 
   <script src="pagina2.js"></script>
 </body>
