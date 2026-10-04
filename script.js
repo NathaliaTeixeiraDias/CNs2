@@ -2,7 +2,7 @@
 // 1) A "senha certa" fica guardada aqui.
 //    Troque pelo que quiser: uma palavra, uma data, um apelido...
 // ---------------------------------------------------------
-const SENHA_CORRETA = "nathalia";
+const SENHA_CORRETA = "nat";
 
 // ---------------------------------------------------------
 // 2) Pegamos os elementos do HTML que vamos usar.
@@ -39,7 +39,7 @@ formulario.addEventListener("submit", function (evento) {
     // Se acertou: escondemos o formulário e "destrancamos" o cadeado.
     formulario.hidden = true;
     mensagemErro.textContent = "O portal reconhece você...";
-    mensagemErro.style.color = "var(--roxo-claro)";
+    mensagemErro.style.color = "#d8b4fe"; // lavanda claro, mais visível que o roxo escuro
 
     // a classe "aberta" na alça faz ela girar (definido no CSS
     // com transition + transform: rotate). a classe "aberto" no
