@@ -4,208 +4,200 @@
   --roxo-claro: #a855f7;
   --gold: #a9822f;
   --bone: #e7e2d3;
+  --danger: #8c3a3a;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  user-select: none;
-  -webkit-user-select: none;
 }
 
 html, body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: radial-gradient(circle at 50% 30%, #171225 0%, #07060a 60%, #030303 100%);
+  min-height: 100%;
+}
+
+body {
+  background: radial-gradient(circle at 50% 30%, #171225 0%, #0a0710 60%, #030303 100%);
   color: var(--bone);
   font-family: 'EB Garamond', serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  padding: 24px;
 }
 
-canvas {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  touch-action: none;
-  z-index: 0;
+/* ---------- fagulhas roxas do fundo ---------- */
+.brasa {
+  position: absolute;
+  bottom: -10px;
+  left: var(--x, 50%);
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--roxo-claro);
+  box-shadow: 0 0 7px 2px var(--roxo-claro);
+  opacity: 0;
+  animation: subir var(--t, 9s) linear var(--d, 0s) infinite;
 }
 
-header {
-  position: fixed;
-  top: calc(28px + env(safe-area-inset-top, 0px));
-  left: 0;
-  right: 0;
-  text-align: center;
+@keyframes subir {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  10%  { opacity: .9; }
+  100% { transform: translateY(-640px) translateX(14px); opacity: 0; }
+}
+
+/* ---------- conteúdo central ---------- */
+.portal {
+  position: relative;
   z-index: 2;
-  padding: 0 24px;
+  text-align: center;
+  max-width: 420px;
+  padding: 40px 28px;
+}
+
+.cadeado {
+  width: 116px;
+  margin: 0 auto 26px;
+  filter: drop-shadow(0 0 18px rgba(168, 85, 247, .5));
+  animation: brilho 1s ease;
+  animation-play-state: paused;
+}
+
+.cadeado.aberto {
+  animation-play-state: running;
+}
+
+.cadeado-svg {
+  width: 100%;
+  display: block;
+}
+
+/* a alça do cadeado: gira em volta do ponto (35,38), que é o
+   "pé" dela encaixado no coração. transform-box: fill-box faz
+   o transform-origin usar o espaço de coordenadas do próprio
+   desenho (os mesmos números do "d" do path), em vez do espaço
+   da página inteira. */
+.cadeado-alca {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform-box: fill-box;
+  transform-origin: 100% 100%;
+  transition: transform 1s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.cadeado-alca.aberta {
+  transform: rotate(-115deg);
+}
+
+.cadeado-corpo {
+  fill: rgba(107, 33, 168, .18);
+  stroke: var(--gold);
+  stroke-width: 2.4;
+}
+
+.cadeado-fechadura {
+  fill: var(--roxo-claro);
+  animation: pulsar 3.4s ease-in-out infinite;
+}
+
+@keyframes pulsar { 0%, 100% { opacity: .5; } 50% { opacity: 1; } }
+
+@keyframes brilho {
+  0%, 100% { filter: drop-shadow(0 0 18px rgba(168, 85, 247, .5)); }
+  50% { filter: drop-shadow(0 0 36px rgba(168, 85, 247, .95)); }
 }
 
 .titulo {
   font-family: 'Cinzel', serif;
   font-weight: 700;
-  font-size: clamp(18px, 4vw, 26px);
-  letter-spacing: .02em;
+  font-size: clamp(24px, 5vw, 34px);
+  letter-spacing: .03em;
+  margin-bottom: 10px;
 }
 
-#btn {
-  position: fixed;
-  left: 50%;
-  bottom: calc(14% + env(safe-area-inset-bottom, 0px));
-  transform: translateX(-50%);
-  z-index: 2;
-  padding: 14px 34px;
-  font: 600 16px 'Cinzel', serif;
-  letter-spacing: .08em;
-  color: var(--bone);
-  background: rgba(168, 85, 247, .12);
-  border: 2px solid var(--gold);
-  border-radius: 999px;
-  box-shadow: 0 0 18px rgba(168, 85, 247, .55), inset 0 0 12px rgba(168, 85, 247, .35);
-  cursor: pointer;
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
-  animation: pulsar-botao 1.6s ease-in-out infinite;
-  transition: opacity .6s, transform .6s;
+.subtitulo {
+  font-style: italic;
+  color: #b8b2a3;
+  font-size: 18px;
+  margin-bottom: 30px;
 }
 
-#btn.escondido {
-  opacity: 0;
-  pointer-events: none;
-  transform: translateX(-50%) scale(.8);
-}
-
-@keyframes pulsar-botao {
-  50% { box-shadow: 0 0 32px rgba(168, 85, 247, .8), inset 0 0 16px rgba(168, 85, 247, .55); }
-}
-
-main {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: calc(6% + env(safe-area-inset-bottom, 0px));
-  z-index: 2;
-  text-align: center;
-}
-
-nav[hidden] {
-  display: none;
-}
-
-nav {
-  opacity: 0;
-  transition: opacity 1s ease;
-}
-
-nav.visivel {
-  opacity: 1;
+/* ---------- formulário ---------- */
+.form-senha {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
 }
 
 .rotulo {
   font-family: 'Cinzel', serif;
-  font-size: 12px;
-  letter-spacing: .14em;
+  font-size: 14px;
+  letter-spacing: .12em;
   color: var(--gold);
-  margin-bottom: 10px;
 }
 
-nav ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-}
-
-nav a {
+.campo {
+  width: 100%;
+  max-width: 260px;
+  background: rgba(255, 255, 255, .03);
+  border: 1px solid rgba(169, 130, 47, .45);
   color: var(--bone);
-  text-decoration: none;
-  font-style: italic;
-  font-size: 17px;
-  padding: 8px 20px;
-  border-bottom: 1px solid rgba(169, 130, 47, .5);
-  transition: border-color .25s, color .25s;
-}
-
-nav a:hover {
-  color: var(--roxo-claro);
-  border-color: var(--roxo-claro);
-}
-
-/* ---------- bolhas flutuantes ---------- */
-#bolhas[hidden] {
-  display: none;
-}
-
-.bolha {
-  position: fixed;
-  left: var(--x);
-  top: var(--y);
-  z-index: 2;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  border: 1px solid var(--gold);
-  background: radial-gradient(circle at 35% 30%, rgba(168, 85, 247, .55), rgba(107, 33, 168, .25));
-  box-shadow: 0 0 16px rgba(168, 85, 247, .5);
+  font-family: 'EB Garamond', serif;
   font-size: 20px;
-  cursor: pointer;
-  opacity: 0;
-  animation:
-    flutuar 4s ease-in-out var(--atraso) infinite,
-    aparecer .8s ease var(--atraso) forwards;
+  text-align: center;
+  letter-spacing: .2em;
+  padding: 15px 16px;
+  border-radius: 2px;
+  transition: border-color .25s, box-shadow .25s;
 }
 
-@keyframes flutuar {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-14px); }
+.campo:focus {
+  outline: none;
+  border-color: var(--roxo-claro);
+  box-shadow: 0 0 14px rgba(168, 85, 247, .4);
 }
 
-@keyframes aparecer {
-  to { opacity: 1; }
+.campo.errado {
+  animation: tremer .4s;
+  border-color: var(--danger);
 }
 
-/* ---------- modal da foto ---------- */
-.modal[hidden] {
-  display: none;
+@keyframes tremer {
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
 }
 
-.modal {
-  position: fixed;
-  inset: 0;
-  z-index: 5;
-  background: rgba(3, 2, 5, .88);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity .3s ease;
-}
-
-.modal.visivel {
-  opacity: 1;
-}
-
-.modal img {
-  max-width: 88vw;
-  max-height: 80vh;
-  border-radius: 10px;
-  border: 2px solid var(--gold);
-  box-shadow: 0 0 30px rgba(168, 85, 247, .6);
-}
-
-#fechar-modal {
-  position: fixed;
-  top: calc(20px + env(safe-area-inset-top, 0px));
-  right: 20px;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
+.botao {
+  margin-top: 6px;
+  padding: 16px 34px;
+  background: transparent;
   border: 1px solid var(--gold);
-  background: rgba(0, 0, 0, .4);
   color: var(--bone);
-  font-size: 22px;
-  line-height: 1;
+  font-family: 'Cinzel', serif;
+  font-size: 15px;
+  letter-spacing: .1em;
   cursor: pointer;
+  transition: background .25s, color .25s, border-color .25s;
+}
+
+.botao:hover {
+  background: var(--roxo);
+  border-color: var(--roxo-claro);
+  color: var(--bone);
+}
+
+.erro {
+  min-height: 20px;
+  margin-top: 16px;
+  color: var(--danger);
+  font-style: italic;
+  font-size: 16px;
 }
