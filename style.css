@@ -125,7 +125,7 @@ body {
 .subtitulo {
   font-style: italic;
   color: #b8b2a3;
-  font-size: 17px;
+  font-size: 18px;
   margin-bottom: 30px;
 }
 
@@ -139,8 +139,8 @@ body {
 
 .rotulo {
   font-family: 'Cinzel', serif;
-  font-size: 12px;
-  letter-spacing: .14em;
+  font-size: 14px;
+  letter-spacing: .12em;
   color: var(--gold);
 }
 
@@ -151,10 +151,10 @@ body {
   border: 1px solid rgba(169, 130, 47, .45);
   color: var(--bone);
   font-family: 'EB Garamond', serif;
-  font-size: 18px;
+  font-size: 20px;
   text-align: center;
   letter-spacing: .2em;
-  padding: 12px 16px;
+  padding: 15px 16px;
   border-radius: 2px;
   transition: border-color .25s, box-shadow .25s;
 }
@@ -176,14 +176,14 @@ body {
 }
 
 .botao {
-  margin-top: 4px;
-  padding: 12px 30px;
+  margin-top: 6px;
+  padding: 16px 34px;
   background: transparent;
   border: 1px solid var(--gold);
   color: var(--bone);
   font-family: 'Cinzel', serif;
-  font-size: 13px;
-  letter-spacing: .12em;
+  font-size: 15px;
+  letter-spacing: .1em;
   cursor: pointer;
   transition: background .25s, color .25s, border-color .25s;
 }
@@ -199,5 +199,5 @@ body {
   margin-top: 16px;
   color: var(--danger);
   font-style: italic;
-  font-size: 14px;
+  font-size: 16px;
 }
