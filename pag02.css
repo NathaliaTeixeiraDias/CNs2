@@ -88,3 +88,36 @@ header {
 @keyframes pulsar-botao {
   50% { box-shadow: 0 0 32px rgba(212, 175, 55, .8), inset 0 0 16px rgba(212, 175, 55, .5); }
 }
+
+/* ---------- frases flutuantes ---------- */
+#frases-amor[hidden] {
+  display: none;
+}
+
+.frase-amor {
+  position: fixed;
+  left: var(--x);
+  top: var(--y);
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(15px, 3vw, 19px);
+  color: var(--dourado);
+  text-shadow: 0 0 10px rgba(212, 175, 55, .7);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  animation:
+    flutuar 5s ease-in-out var(--atraso) infinite,
+    aparecer .8s ease var(--atraso) forwards;
+}
+
+@keyframes flutuar {
+  0%, 100% { transform: translate(-50%, -50%); }
+  50%      { transform: translate(-50%, calc(-50% - 14px)); }
+}
+
+@keyframes aparecer {
+  to { opacity: .85; }
+}
