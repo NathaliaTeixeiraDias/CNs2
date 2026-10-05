@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Capítulo 25</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- vídeo de fundo: sem "loop" agora, pra tocar uma vez só e poder terminar -->
+  <video id="video-fundo" autoplay muted playsinline>
+    <source src="vídeos/Design sem nome.mp4" type="video/mp4">
+  </video>
+
+  <!-- foto que aparece quando o vídeo termina -->
+  <img id="foto-fundo" src="imagens/rder2.jpg" alt="">
+
+  <!-- escurece e esquenta o tom do vídeo (e da foto), pra não lavar o texto -->
+  <div class="sobreposicao"></div>
+
+  <!-- clarão branco/laranja sincronizado com o tiro -->
+  <div id="flash"></div>
+
+  <main>
+    <h1 class="titulo">Identifique-se</h1>
+    <p class="subtitulo">A estrada te espera, cavalheiro</p>
+    <button class="botao" id="btn-entrar">Entrar</button>
+
+    <!-- começa escondido; aparece quando clica em "Entrar" -->
+    <form id="form-senha" class="form-senha" hidden autocomplete="off">
+      <label for="campo-senha" class="rotulo-senha">Sua senha, forasteiro</label>
+
+      <div class="campo-com-olho">
+        <input type="password" id="campo-senha" placeholder="••••••••" required>
+        <button type="button" id="botao-olho" aria-label="Mostrar senha">👁</button>
+      </div>
+
+      <button type="submit" class="botao">Confirmar</button>
+    </form>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

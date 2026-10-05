@@ -1,0 +1,225 @@
+@font-face {
+    font-family:'chineserock' ;
+    src: url(fontes/chinese\ rocks\ rg.otf);
+}
+
+@font-face {
+    font-family: 'hapna';
+    src: url(fontes/HapnaSlabSerif-Regular.ttf);
+}
+@font-face {
+    font-family: 'hapnab';
+    src: url(fontes/HapnaSlabSerif-Bold.ttf);
+}
+
+:root {
+  --sepia-escuro: #1a1108;
+  --sepia: #8a6a3a;
+  --areia: #e8d6a8;
+  --vermelho-poeira: #8c3a2b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #0d0905; /* mostra enquanto o vídeo carrega */
+}
+
+/* o vídeo cobre a tela toda, atrás de tudo */
+#video-fundo {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* a foto fica exatamente no mesmo lugar do vídeo, mas invisível —
+   só aparece quando o vídeo termina e ganha a classe "visivel" */
+#foto-fundo {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 1.6s ease;
+}
+
+#foto-fundo.visivel {
+  opacity: 1;
+}
+
+/* gradiente escuro e amarelado por cima do vídeo, pra dar o clima
+   "poeira do deserto" e garantir que o texto não se perca */
+.sobreposicao {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(10, 6, 2, .55) 0%, rgba(10, 6, 2, .35) 40%, rgba(10, 6, 2, .75) 100%),
+    radial-gradient(circle at 50% 45%, rgba(140, 90, 30, .15), rgba(10, 6, 2, .6) 80%);
+}
+
+main {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  color: var(--areia);
+
+  /* some até o tiro acontecer */
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.04);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+main.revelado {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+/* o clarão do tiro: começa invisível, "estoura" e some rápido */
+#flash {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle,
+    rgba(255, 235, 190, 1) 0%,
+    rgba(255, 150, 50, .85) 35%,
+    rgba(0, 0, 0, 0) 72%);
+}
+
+#flash.disparo {
+  animation: estouro .55s ease-out forwards;
+}
+
+@keyframes estouro {
+  0%   { opacity: 0; }
+  10%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+
+.titulo {
+  font-family: 'chineserock', serif;
+  font-size: 7.5em;
+  line-height: 1.15;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, .8);
+  margin-bottom: 14px;
+  max-width: 680px;
+}
+
+.subtitulo {
+  font-family: 'hapnab', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: #cdbb90;
+  margin-bottom: 34px;
+}
+
+.botao {
+  padding: 16px 38px;
+  background: rgba(20, 12, 6, .55);
+  border: 2px solid var(--areia);
+  color: var(--areia);
+  font-family: 'Rye', serif;
+  font-size: 16px;
+  letter-spacing: .08em;
+  cursor: pointer;
+  transition: background .25s, color .25s;
+}
+
+.botao:hover {
+  background: var(--vermelho-poeira);
+  border-color: var(--vermelho-poeira);
+  color: #fff;
+}
+
+#btn-entrar.escondido {
+  display: none;
+}
+
+.form-senha[hidden] {
+  display: none;
+}
+
+.form-senha {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  transition: opacity .6s ease;
+}
+
+.form-senha.visivel {
+  opacity: 1;
+}
+
+.rotulo-senha {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: #cdbb90;
+}
+
+.campo-com-olho {
+  position: relative;
+  width: 100%;
+  max-width: 240px;
+}
+
+.form-senha input {
+  width: 100%;
+  padding: 14px 44px 14px 16px; /* espaço à direita pro botão do olho */
+  text-align: center;
+  letter-spacing: .2em;
+  font-size: 18px;
+  background: rgba(10, 6, 2, .5);
+  border: 1px solid var(--areia);
+  color: var(--areia);
+  font-family: 'EB Garamond', serif;
+}
+
+.form-senha input:focus {
+  outline: none;
+  border-color: var(--vermelho-poeira);
+}
+
+#botao-olho {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px 6px;
+  opacity: .8;
+}
+
+#botao-olho:hover {
+  opacity: 3;
+}

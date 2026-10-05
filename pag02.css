@@ -1,0 +1,90 @@
+@font-face {
+    font-family:'chineserock' ;
+    src: url(fontes/chinese\ rocks\ rg.otf);
+}
+
+@font-face {
+    font-family: 'hapna';
+    src: url(fontes/HapnaSlabSerif-Regular.ttf);
+}
+@font-face {
+    font-family: 'hapnab';
+    src: url(fontes/HapnaSlabSerif-Bold.ttf);
+}
+
+:root {
+  --areia: #e8d6a8;
+  --dourado: #d4af37;
+  --marrom: #8a6a3a;
+  --vermelho-poeira: #8c3a2b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 30%, #2a1d10 0%, #130d07 60%, #050302 100%);
+  color: var(--areia);
+}
+
+canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  z-index: 0;
+}
+
+header {
+  position: fixed;
+  top: calc(28px + env(safe-area-inset-top, 0px));
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 2;
+}
+
+.titulo {
+  font-family: 'chineserock', serif;
+  font-size: 5em;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, .8);
+}
+
+#btn {
+  position: fixed;
+  left: 50%;
+  bottom: calc(14% + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  z-index: 2;
+  padding: 16px 36px;
+  font: 16px 'hapnab', serif;
+  letter-spacing: .05em;
+  color: var(--areia);
+  background: rgba(140, 58, 43, .25);
+  border: 2px solid var(--dourado);
+  border-radius: 999px;
+  box-shadow: 0 0 18px rgba(212, 175, 55, .5), inset 0 0 12px rgba(212, 175, 55, .3);
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  animation: pulsar-botao 1.6s ease-in-out infinite;
+  transition: opacity .6s, transform .6s;
+}
+
+#btn.escondido {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) scale(.8);
+}
+
+@keyframes pulsar-botao {
+  50% { box-shadow: 0 0 32px rgba(212, 175, 55, .8), inset 0 0 16px rgba(212, 175, 55, .5); }
+}
