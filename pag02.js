@@ -17,6 +17,16 @@ const rnd = (a, b) => a + Math.random() * (b - a);
 
 const P = [];
 for (let i = 0; i < COUNT; i++) {
+    // poeira flutuando pela tela inteira, sem depender do coração
+const POEIRA = [];
+for (let i = 0; i < 70; i++) {
+  POEIRA.push({
+    x: Math.random(), y: Math.random(),
+    s: rnd(0.6, 1.8), vy: rnd(0.01, 0.03),
+    ph: rnd(0, 6.28),
+    cor: Math.random() < 0.5 ? "#d4af37" : "#8a6a3a"
+  });
+}
   let x, y, z;
   do {
     x = rnd(-1.3, 1.3); y = rnd(-1.1, 1.1); z = rnd(-1.2, 1.4);
@@ -129,3 +139,16 @@ function frame(now) {
   requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
+
+  drawBase(form, clock);
+  ctx.globalCompositeOperation = "lighter";
+
+  // desenha a poeira, sempre, não importa se o coração já formou
+  POEIRA.forEach(d => {
+    d.y -= d.vy * dt;
+    if (d.y < -0.05) d.y = 1.05; // volta pro fundo da tela quando sai por cima
+    const alpha = 0.25 + 0.35 * Math.abs(Math.sin(clock * 1.5 + d.ph));
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = d.cor;
+    ctx.fillRect(d.x * W, d.y * H, d.s, d.s);
+  });

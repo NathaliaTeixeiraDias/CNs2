@@ -100,7 +100,7 @@ header {
   top: var(--y);
   z-index: 2;
   transform: translate(-50%, -50%);
-  font-family: 'EB Garamond', serif;
+  font-family: 'hapnab', serif;
   font-style: italic;
   font-size: clamp(15px, 3vw, 19px);
   color: var(--dourado);
