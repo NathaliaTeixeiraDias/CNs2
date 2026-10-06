@@ -1,8 +1,8 @@
 // vermelho, dourado, marrom, branco-areia
-const PALETA = ["#8c3a2b", "#d41827", "#d4af37", "#8a6a3a", "#e8d6a8"];;
+const PALETA = ["#8c3a2b", "#d41827", "#d4af37", "#8a6a3a", "#e8d6a8"];
 const COUNT = 3500;     // quantidade de partículas
 const ROT_SPEED = 0.45; // velocidade do giro depois de formado
-const FORM_TIME = 2.6;  // duração da formação (segundos)
+const FORM_TIME = 1.6;  // duração da formação (segundos)
 
 const canvas = document.getElementById("c");
 const ctx = canvas.getContext("2d");
@@ -15,18 +15,19 @@ function f(x, y, z) {
 }
 const rnd = (a, b) => a + Math.random() * (b - a);
 
-const P = [];
-for (let i = 0; i < COUNT; i++) {
-    // poeira flutuando pela tela inteira, sem depender do coração
+// poeira flutuando pela tela inteira, sem depender do coração
 const POEIRA = [];
-for (let i = 0; i < 70; i++) {
+for (let i = 0; i < 220; i++) {
   POEIRA.push({
     x: Math.random(), y: Math.random(),
     s: rnd(0.6, 1.8), vy: rnd(0.01, 0.03),
     ph: rnd(0, 6.28),
-    cor: Math.random() < 0.5 ? "#d4af37" : "#8a6a3a"
+    cor: Math.random() < 0.5 ? "#d4af37" : "#d41827"
   });
 }
+
+const P = [];
+for (let i = 0; i < COUNT; i++) {
   let x, y, z;
   do {
     x = rnd(-1.3, 1.3); y = rnd(-1.1, 1.1); z = rnd(-1.2, 1.4);
@@ -55,9 +56,8 @@ addEventListener("resize", resize);
 resize();
 
 const btn = document.getElementById("btn");
-let started = false, t0 = 0, rot = 0, startX = null, lastX = 0;
-
 const frasesAmor = document.getElementById("frases-amor");
+let started = false, t0 = 0, rot = 0, startX = null, lastX = 0;
 
 btn.addEventListener("click", () => {
   if (started) return;
@@ -118,6 +118,16 @@ function frame(now) {
   drawBase(form, clock);
   ctx.globalCompositeOperation = "lighter";
 
+  // desenha a poeira, sempre, não importa se o coração já formou
+  POEIRA.forEach(d => {
+    d.y -= d.vy * dt;
+    if (d.y < -0.05) d.y = 1.05; // volta pro fundo da tela quando sai por cima
+    const alpha = 0.25 + 0.35 * Math.abs(Math.sin(clock * 1.5 + d.ph));
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = d.cor;
+    ctx.fillRect(d.x * W, d.y * H, d.s, d.s);
+  });
+
   for (let i = 0; i < COUNT; i++) {
     const p = P[i];
     const e = ease(Math.max(0, Math.min(1, (tf - p.delay) / p.dur)));
@@ -139,16 +149,3 @@ function frame(now) {
   requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
-
-  drawBase(form, clock);
-  ctx.globalCompositeOperation = "lighter";
-
-  // desenha a poeira, sempre, não importa se o coração já formou
-  POEIRA.forEach(d => {
-    d.y -= d.vy * dt;
-    if (d.y < -0.05) d.y = 1.05; // volta pro fundo da tela quando sai por cima
-    const alpha = 0.25 + 0.35 * Math.abs(Math.sin(clock * 1.5 + d.ph));
-    ctx.globalAlpha = alpha;
-    ctx.fillStyle = d.cor;
-    ctx.fillRect(d.x * W, d.y * H, d.s, d.s);
-  });
