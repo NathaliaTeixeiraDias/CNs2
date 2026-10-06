@@ -121,33 +121,3 @@ header {
 @keyframes aparecer {
   to { opacity: .85; }
 }
-
-#btn-continuar[hidden] {
-  display: none;
-}
-
-#btn-continuar {
-  position: fixed;
-  left: 50%;
-  bottom: calc(5% + env(safe-area-inset-bottom, 0px));
-  transform: translateX(-50%);
-  z-index: 2;
-  padding: 12px 30px;
-  font: 14px 'Rye', serif;
-  letter-spacing: .05em;
-  color: var(--areia);
-  text-decoration: none;
-  border: 1px solid var(--areia);
-  border-radius: 999px;
-  opacity: 0;
-  transition: opacity 1s ease;
-}
-
-#btn-continuar.visivel {
-  opacity: .85;
-}
-
-#btn-continuar:hover {
-  border-color: var(--dourado);
-  color: var(--dourado);
-}

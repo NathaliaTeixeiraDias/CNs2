@@ -17,7 +17,7 @@ const rnd = (a, b) => a + Math.random() * (b - a);
 
 // poeira flutuando pela tela inteira, sem depender do coração
 const POEIRA = [];
-for (let i = 0; i < 220; i++) {
+for (let i = 0; i < 160; i++) {
   POEIRA.push({
     x: Math.random(), y: Math.random(),
     s: rnd(0.6, 1.8), vy: rnd(0.01, 0.03),
@@ -59,19 +59,16 @@ const btn = document.getElementById("btn");
 const frasesAmor = document.getElementById("frases-amor");
 let started = false, t0 = 0, rot = 0, startX = null, lastX = 0;
 
-btn.addEventListener("click"), () => {
+btn.addEventListener("click", () => {
   if (started) return;
   started = true;
   t0 = performance.now();
   btn.classList.add("escondido");
-}
+
   setTimeout(() => {
     frasesAmor.hidden = false;
-
-    const btnContinuar = document.getElementById("btn-continuar");
-    btnContinuar.hidden = false;
-    requestAnimationFrame(() => btnContinuar.classList.add("visivel"));
   }, FORM_TIME * 1.4 * 1000);
+});
 
 canvas.addEventListener("pointerdown", e => { startX = lastX = e.clientX; });
 canvas.addEventListener("pointermove", e => {
