@@ -2,7 +2,7 @@
 const PALETA = ["#8c3a2b", "#d41827", "#d4af37", "#8a6a3a", "#e8d6a8"];
 const COUNT = 3500;     // quantidade de partículas
 const ROT_SPEED = 0.45; // velocidade do giro depois de formado
-const FORM_TIME = 1.6;  // duração da formação (segundos)
+const FORM_TIME = 2.6;  // duração da formação (segundos)
 
 const canvas = document.getElementById("c");
 const ctx = canvas.getContext("2d");
@@ -17,12 +17,12 @@ const rnd = (a, b) => a + Math.random() * (b - a);
 
 // poeira flutuando pela tela inteira, sem depender do coração
 const POEIRA = [];
-for (let i = 0; i < 160; i++) {
+for (let i = 0; i < 70; i++) {
   POEIRA.push({
     x: Math.random(), y: Math.random(),
     s: rnd(0.6, 1.8), vy: rnd(0.01, 0.03),
     ph: rnd(0, 6.28),
-    cor: Math.random() < 0.5 ? "#d4af37" : "#d41827"
+    cor: Math.random() < 0.5 ? "#d4af37" : "#8a6a3a"
   });
 }
 
@@ -65,9 +65,16 @@ btn.addEventListener("click", () => {
   t0 = performance.now();
   btn.classList.add("escondido");
 
-  setTimeout(() => {
+    setTimeout(() => {
     frasesAmor.hidden = false;
   }, FORM_TIME * 1.4 * 1000);
+
+  // o botão "Continuar" espera mais um pouco depois das frases
+  setTimeout(() => {
+    const btnContinuar = document.getElementById("btn-continuar");
+    btnContinuar.hidden = false;
+    requestAnimationFrame(() => btnContinuar.classList.add("visivel"));
+  }, FORM_TIME * 1.4 * 1000 + 4000); // 3000 = 3 segundos depois das frases
 });
 
 canvas.addEventListener("pointerdown", e => { startX = lastX = e.clientX; });
