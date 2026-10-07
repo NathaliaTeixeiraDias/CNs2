@@ -17,12 +17,12 @@ const rnd = (a, b) => a + Math.random() * (b - a);
 
 // poeira flutuando pela tela inteira, sem depender do coração
 const POEIRA = [];
-for (let i = 0; i < 70; i++) {
+for (let i = 0; i < 320; i++) {
   POEIRA.push({
     x: Math.random(), y: Math.random(),
     s: rnd(0.6, 1.8), vy: rnd(0.01, 0.03),
     ph: rnd(0, 6.28),
-    cor: Math.random() < 0.5 ? "#d4af37" : "#8a6a3a"
+    cor: Math.random() < 0.5 ? "#d4af37" : "#d41827" 
   });
 }
 
@@ -74,7 +74,7 @@ btn.addEventListener("click", () => {
     const btnContinuar = document.getElementById("btn-continuar");
     btnContinuar.hidden = false;
     requestAnimationFrame(() => btnContinuar.classList.add("visivel"));
-  }, FORM_TIME * 1.4 * 1000 + 4000); // 3000 = 3 segundos depois das frases
+  }, FORM_TIME * 1.4 * 1000 + 4000); // 3000 = 3 segundos depois das frases 
 });
 
 canvas.addEventListener("pointerdown", e => { startX = lastX = e.clientX; });
