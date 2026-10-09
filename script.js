@@ -47,18 +47,31 @@ btnEntrar.addEventListener("click", () => {
   requestAnimationFrame(() => formSenha.classList.add("visivel"));
 });
 
-const SENHA_CORRETA = "cadu"; // é só trocar essa palavra
+// ---------- logins e senhas aceitos ----------
+// Pode colocar quantos quiser em cada lista.
+// Maiúsculas, espaços nas pontas e acentos são ignorados.
+const LOGINS_CORRETOS = ["Carlos Eduardo", "carlos eduardo", "cadu", "Cadu"];
+const SENHAS_CORRETAS = ["25", "vinte e cinco", "25 anos"];
+
+const campoLogin = document.getElementById("campo-login");
+
+// tira acentos, espaços das pontas e maiúsculas
+const limpar = (texto) =>
+  texto.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
 formSenha.addEventListener("submit", (evento) => {
   evento.preventDefault();
 
-  const valorDigitado = campoSenha.value.trim().toLowerCase();
+  const login = limpar(campoLogin.value);
+  const senha = limpar(campoSenha.value);
 
-  if (valorDigitado === SENHA_CORRETA.toLowerCase()) {
-      window.location.href = "pag02.html";
-  
-      } else {
-    campoSenha.value = "cadu";
+  const loginOk = LOGINS_CORRETOS.some((l) => limpar(l) === login);
+  const senhaOk = SENHAS_CORRETAS.some((s) => limpar(s) === senha);
+
+  if (loginOk && senhaOk) {
+    window.location.href = "pag02.html";
+  } else {
+    campoSenha.value = "";
     campoSenha.placeholder = "Tente de novo...";
   }
 });
