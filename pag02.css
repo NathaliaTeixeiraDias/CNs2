@@ -11,6 +11,10 @@
     font-family: 'hapnab';
     src: url(fontes/HapnaSlabSerif-Bold.ttf);
 }
+@font-face {
+  font-family:'Minhaletra-Regular';
+  src: url(fontes/Minhaletra-Regular.ttf);
+}
 
 :root {
   --areia: #e8d6a8;
@@ -52,11 +56,6 @@ header {
   z-index: 2;
 }
 
-.titulo {
-  font-family: 'chineserock', serif;
-  font-size: 4.5em;
-  text-shadow: 0 4px 10px rgba(0, 0, 0, .8);
-}
 
 #btn {
   position: fixed;
