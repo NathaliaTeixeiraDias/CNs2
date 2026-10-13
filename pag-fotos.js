@@ -16,7 +16,7 @@
   // Enquanto a foto não existir na pasta, aparece uma imagem de exemplo.
   const FOTOS = [
     { src: 'imagens/fotos/foto3.jpg', legenda: 'Modo "fome" ativado.' },
-    { frase: 'A distância é só um detalhe. Eu escolho você de qualquer lugar.' },
+    { frase: 'A distância é só um detalhe. Eu escolho você de qualquer lugar.', legenda: 'Verso opcional: pode deixar vazio.' },
     { src: 'imagens/fotos/foto5.jpg', legenda: 'Foragido do bom senso.' },
     { src: 'imagens/fotos/foto6.jpg', legenda: 'Procurado: por mim, todo dia.' },
     { src: 'imagens/fotos/foto7.jpg', legenda: 'Esse olhar quando eu pego a última batata.' },
@@ -25,7 +25,7 @@
 
   // Velocidade dos alvos, em pixels por segundo: [mais lento, mais rápido].
   // Quanto maior o número, mais difícil de acertar.
-  const VELOCIDADE = [240,290];
+  const VELOCIDADE = [130, 240];
 
   // Palavrinhas que sobem depois de cada tiro
   const ACERTOS = ['BANG!', 'Na mosca!', 'Boa, cowboy!', 'Mira de ouro!'];
@@ -59,7 +59,7 @@
   /* ---------- brasas de fundo ---------- */
   const cv = $('#brasas');
   const cx = cv.getContext('2d');
-  const CORES = ['#f0c64b', '#ffffff'];
+  const CORES = ['#ffd75e', '#ffffff', '#ff3b30', '#ffb02e', '#ff6a3d'];
   let W = 0, H = 0, brasas = [];
 
   function novaBrasa(aleatoria) {
@@ -260,6 +260,7 @@
 
     const img = p.querySelector('img');
     if (f.frase) {
+      p.classList.add('so-frase');   // frase não vira
       // cartão de couro com a frase, em vez de foto
       const cartao = document.createElement('div');
       cartao.className = 'frase';
@@ -375,7 +376,7 @@
         pronto = true;
         canvas.classList.add('limpo');
         p.classList.add('revelada');
-        p.querySelector('.rotulo').textContent = 'toque para virar';
+        p.querySelector('.rotulo').textContent = p.classList.contains('so-frase') ? '' : 'toque para virar';
         revelados++;
         if (revelados === N) {
           if (sub) sub.textContent = 'Só lembrança boa. Pode seguir, cowboy.';
@@ -443,7 +444,9 @@
 
     const soltar = () => {
       if (!arrasto) return;
-      if (!arrasto.moveu && p.classList.contains('revelada')) p.classList.toggle('virada');
+      if (!arrasto.moveu && p.classList.contains('revelada') && !p.classList.contains('so-frase')) {
+        p.classList.toggle('virada');
+      }
       p.classList.remove('arrastando');
       arrasto = null;
     };
