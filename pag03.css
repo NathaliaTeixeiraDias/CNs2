@@ -279,20 +279,6 @@ html, body {
   box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.8);
 }
 
-.dica {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 8px;
-  z-index: 20;
-  text-align: center;
-  font-size: 0.66rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(242, 193, 78, 0.65);
-  pointer-events: none;
-}
-
 /* ---------- POLAROID ---------- */
 .polaroid {
   position: absolute;
@@ -445,4 +431,28 @@ canvas.raspa.limpo { opacity: 0; pointer-events: none; }
   line-height: 1.12;
   color: #f6dc9b;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* ---------- pôr do sol no deserto: sol, mesas, dunas e cactos ---------- */
+#galeria::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 140' preserveAspectRatio='xMidYMax slice'><defs><radialGradient id='h'><stop offset='0' stop-color='%23ffc864' stop-opacity='.45'/><stop offset='1' stop-color='%23ff7a30' stop-opacity='0'/></radialGradient><radialGradient id='s'><stop offset='0' stop-color='%23fff3c4'/><stop offset='.7' stop-color='%23ffd27a'/><stop offset='1' stop-color='%23ffb347'/></radialGradient></defs><circle cx='600' cy='92' r='120' fill='url(%23h)'/><circle cx='600' cy='92' r='44' fill='url(%23s)'/><path fill='%233b130e' d='M0 140V104H58L78 86H196L216 104H310L332 94H408L426 104H520Q600 114 680 104H742L764 90H862L884 74H986L1008 92H1090L1110 84H1200V140Z'/><path fill='%23170806' d='M0 140V124Q150 110 300 122T600 126T900 120T1200 124V140Z'/><g stroke='%230c0403' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' fill='none'><path transform='translate(150 134) scale(1.1)' d='M0 0V-46M0 -20H-11V-34M0 -30H11V-42'/><path transform='translate(255 136) scale(.75)' d='M0 0V-46M0 -20H-11V-34M0 -30H11V-42'/><path transform='translate(470 135) scale(.7)' d='M0 0V-46M0 -20H-11V-34M0 -30H11V-42'/><path transform='translate(700 134) scale(1.3)' d='M0 0V-46M0 -20H-11V-34M0 -30H11V-42'/><path transform='translate(935 134) scale(1.15)' d='M0 0V-46M0 -20H-11V-34M0 -30H11V-42'/><path transform='translate(1045 136) scale(.8)' d='M0 0V-46M0 -20H-11V-34M0 -30H11V-42'/><path transform='translate(1150 135) scale(.95)' d='M0 0V-46M0 -20H-11V-34M0 -30H11V-42'/></g></svg>") center bottom / cover no-repeat;
+}
+
+/* ---------- aviso na mesa vazia (some quando a 1ª polaroid cai) ---------- */
+#mesa:empty::before {
+    position: absolute;
+  left: 0;
+  right: 0;
+  top: 38%;
+  text-align: center;
+  font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(242, 193, 78, 0.45);
+  pointer-events: none;
 }

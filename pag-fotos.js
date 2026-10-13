@@ -16,9 +16,7 @@
   // Enquanto a foto não existir na pasta, aparece uma imagem de exemplo.
   const FOTOS = [
     { src: 'imagens/fotos/foto1.jpg', legenda: 'Quando você diz "só mais cinco minutinhos".' },
-    { src: 'imagens/fotos/foto2.jpg', legenda: 'Cara de quem ouviu "vamos fazer trilha".' },
-    { src: 'imagens/fotos/foto3.jpg', legenda: 'Modo "fome" ativado.' },
-    { frase: 'A distância é só um detalhe. Eu escolho você de qualquer lugar.', legenda: 'Verso opcional: pode deixar vazio.' },
+    { frase: 'Espero poder ver muitos pôr do sol ao seu lado!', legenda: 'Verso opcional: pode deixar vazio.' },
     { src: 'imagens/fotos/foto5.jpg', legenda: 'Foragido do bom senso.' },
     { src: 'imagens/fotos/foto6.jpg', legenda: 'Procurado: por mim, todo dia.' },
     { src: 'imagens/fotos/foto7.jpg', legenda: 'Esse olhar quando eu pego a última batata.' },
@@ -27,11 +25,11 @@
 
   // Velocidade dos alvos, em pixels por segundo: [mais lento, mais rápido].
   // Quanto maior o número, mais difícil de acertar.
-  const VELOCIDADE = [130, 240];
+  const VELOCIDADE = [240,280];
 
   // Palavrinhas que sobem depois de cada tiro
   const ACERTOS = ['BANG!', 'Na mosca!', 'Boa, cowboy!', 'Mira de ouro!'];
-  const ERROS = ['Errou!', 'Quase!', 'Tente de novo!','Ops'];
+  const ERROS = ['Errou!', 'Quase!', 'Tente de novo!','Ops!'];
 
   /* ========================================================== */
 
