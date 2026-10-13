@@ -15,8 +15,8 @@
   //   legenda = o que aparece no verso da polaroid (opcional)
   // Enquanto a foto não existir na pasta, aparece uma imagem de exemplo.
   const FOTOS = [
-    { src: 'imagens/fotos/foto1.jpg', legenda: 'Quando você diz "só mais cinco minutinhos".' },
-    { frase: 'Espero poder ver muitos pôr do sol ao seu lado!', legenda: 'Verso opcional: pode deixar vazio.' },
+    { src: 'imagens/fotos/foto3.jpg', legenda: 'Modo "fome" ativado.' },
+    { frase: 'A distância é só um detalhe. Eu escolho você de qualquer lugar.', legenda: 'Verso opcional: pode deixar vazio.' },
     { src: 'imagens/fotos/foto5.jpg', legenda: 'Foragido do bom senso.' },
     { src: 'imagens/fotos/foto6.jpg', legenda: 'Procurado: por mim, todo dia.' },
     { src: 'imagens/fotos/foto7.jpg', legenda: 'Esse olhar quando eu pego a última batata.' },
@@ -25,11 +25,11 @@
 
   // Velocidade dos alvos, em pixels por segundo: [mais lento, mais rápido].
   // Quanto maior o número, mais difícil de acertar.
-  const VELOCIDADE = [240,280];
+  const VELOCIDADE = [240,290];
 
   // Palavrinhas que sobem depois de cada tiro
   const ACERTOS = ['BANG!', 'Na mosca!', 'Boa, cowboy!', 'Mira de ouro!'];
-  const ERROS = ['Errou!', 'Quase!', 'Tente de novo!','Ops!'];
+  const ERROS = ['Errou!', 'Quase!', 'Só ar...'];
 
   /* ========================================================== */
 
@@ -47,7 +47,6 @@
   const sub = $('#sub');
   const dica = $('#dica');
 
-  if (document.fonts) document.fonts.load('bold 20px Rye');
   const N = FOTOS.length;
   const alvos = [];
   let abatidos = 0;
@@ -186,9 +185,8 @@
     setTimeout(() => a.el.remove(), 950);
 
     if (abatidos === N) {
-      sub.textContent = 'Todos os alvos abatidos. Agora raspe as fotos!';
+      if (sub) sub.textContent = 'Todos os alvos abatidos. Agora raspe tudo!';
       contador.hidden = true;
-      botaoContinuar.hidden = false;
     }
   }
 
@@ -304,7 +302,7 @@
 
     setTimeout(() => p.classList.remove('voando'), 1000);
 
-    if (dica.hidden) dica.hidden = false;
+    if (dica && dica.hidden) dica.hidden = false;
   }
 
   /* ---------- raspadinha ---------- */
@@ -314,7 +312,7 @@
     const h = canvas.offsetHeight;
     canvas.width = w * dpr;
     canvas.height = h * dpr;
-    const c = canvas.getContext('2d', { willReadFrequently: true });
+    const c = canvas.getContext('2d');
     c.scale(dpr, dpr);
 
     // película dourada
@@ -379,7 +377,10 @@
         p.classList.add('revelada');
         p.querySelector('.rotulo').textContent = 'toque para virar';
         revelados++;
-        if (revelados === N) sub.textContent = 'Só lembrança boa. Pode seguir, cowboy.';
+        if (revelados === N) {
+          if (sub) sub.textContent = 'Só lembrança boa. Pode seguir, cowboy.';
+          botaoContinuar.hidden = false;   // só aparece depois de raspar tudo
+        }
       }
     }
 
