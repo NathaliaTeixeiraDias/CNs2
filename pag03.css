@@ -47,7 +47,9 @@
 html, body {
   height: 100%;
   overflow: hidden;
-  background: #000;
+    background:
+    radial-gradient(ellipse 70% 30% at 50% 38%, rgba(255, 190, 90, 0.28), transparent 70%),
+    linear-gradient(180deg, #12060a 0%, #3a0f10 20%, #7a2415 32%, #b2481a 38%, #0b0603 38.1%, #000 100%);
   color: var(--creme);
   font-family: 'chineserock',serif;
   overscroll-behavior: none;
