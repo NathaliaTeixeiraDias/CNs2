@@ -1,8 +1,15 @@
 @font-face {
-  font-family: 'Hapna';
-  src: url('fontes/HapnaSlabSerif-ExtraBold.ttf') format('truetype');
-  font-weight: 800;
-  font-display: swap;
+    font-family:'chineserock' ;
+    src: url(fontes/chinese\ rocks\ rg.otf);
+}
+
+@font-face {
+    font-family: 'hapna';
+    src: url(fontes/HapnaSlabSerif-Regular.ttf);
+}
+@font-face {
+    font-family: 'hapnab';
+    src: url(fontes/HapnaSlabSerif-Bold.ttf);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -42,7 +49,7 @@ html, body {
   overflow: hidden;
   background: #000;
   color: var(--creme);
-  font-family: 'Hapna', 'Rye', Georgia, serif;
+  font-family: 'chineserock',serif;
   overscroll-behavior: none;
 }
 
@@ -215,7 +222,7 @@ html, body {
   position: absolute;
   z-index: 40;
   pointer-events: none;
-  font-family: 'Rye', 'Hapna', serif;
+  font-family:'hapnab', serif;
   font-size: clamp(0.95rem, 2.4vw, 1.25rem);
   color: var(--ouro);
   text-shadow: 0 0 10px rgba(242, 193, 78, 0.8), 0 2px 3px rgba(0, 0, 0, 0.8);
