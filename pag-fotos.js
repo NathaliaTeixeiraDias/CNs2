@@ -16,7 +16,7 @@
   // Enquanto a foto não existir na pasta, aparece uma imagem de exemplo.
   const FOTOS = [
     { src: 'imagens/fotos/foto3.jpg', legenda: 'Modo "fome" ativado.' },
-    { frase: 'A distância é só um detalhe. Eu escolho você de qualquer lugar.', legenda: 'Verso opcional: pode deixar vazio.' },
+    { frase: 'A distância é só um detalhe. Eu escolho você de qualquer lugar.' },
     { src: 'imagens/fotos/foto5.jpg', legenda: 'Foragido do bom senso.' },
     { src: 'imagens/fotos/foto6.jpg', legenda: 'Procurado: por mim, todo dia.' },
     { src: 'imagens/fotos/foto7.jpg', legenda: 'Esse olhar quando eu pego a última batata.' },
