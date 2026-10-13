@@ -1,11 +1,46 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Tiro ao Alvo</title>
+  <link rel="icon" href="favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Rye&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="pag03.css">
 </head>
 <body>
-    
+
+  <!-- brasas de fundo, no mesmo clima da página do coração -->
+  <canvas id="brasas" aria-hidden="true"></canvas>
+
+  <!-- clarão do tiro -->
+  <div id="flash" aria-hidden="true"></div>
+
+  <main id="cena">
+
+    <header class="topo">
+      <h1>Atire nos alvos, cowboy</h1>
+      <p class="sub" id="sub">Cada acerto revela uma lembrança</p>
+      <div class="status">
+        <span id="contador">Alvos: 0 / 0</span>
+        <!-- o link é definido no pag-fotos.js (PROXIMA_PAGINA) -->
+        <a id="continuar" class="botao" href="#" hidden>Continuar</a>
+      </div>
+    </header>
+
+    <!-- estande de tiro: os alvos deslizam aqui -->
+    <section id="galeria" aria-label="Estande de tiro">
+      <div class="trilho"></div>
+    </section>
+
+    <!-- mesa: as polaroids caem aqui -->
+    <section id="mesa" aria-label="Mesa de fotos"></section>
+
+    <p class="dica" id="dica" hidden>Raspe a foto · arraste para mover · toque para virar</p>
+  </main>
+
+  <script src="pag-fotos.js"></script>
 </body>
 </html>
