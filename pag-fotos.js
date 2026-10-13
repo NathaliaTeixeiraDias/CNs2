@@ -59,7 +59,7 @@
   /* ---------- brasas de fundo ---------- */
   const cv = $('#brasas');
   const cx = cv.getContext('2d');
-  const CORES = ['#ffd75e', '#ffffff', '#ff3b30', '#ffb02e', '#ff6a3d'];
+  const CORES = ['#f0c64b', '#ffffff'];
   let W = 0, H = 0, brasas = [];
 
   function novaBrasa(aleatoria) {

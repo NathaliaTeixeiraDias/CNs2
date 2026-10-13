@@ -264,7 +264,11 @@ html, body {
   75%      { transform: translate(-2px, -1px); }
 }
 
-/* ---------- MESA ---------- */
+/* ---------- MESA (tampo de madeira de saloon) ----------
+   1) Apague o bloco  #mesa { ... }  do seu CSS
+   2) Apague também o  #mesa::before { ... }  se você colou a versão anterior
+   3) Cole este bloco no lugar.
+   A borda do balcão agora faz parte do fundo da mesa (fica sempre no topo). */
 #mesa {
   position: absolute;
   left: 0;
@@ -273,10 +277,33 @@ html, body {
   bottom: 0;
   z-index: 5;
   border-top: 2px solid var(--ouro-escuro);
+  box-shadow: 0 -4px 14px rgba(0, 0, 0, 0.5);
   background:
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.018) 0 2px, transparent 2px 96px),
-    radial-gradient(ellipse at 50% 30%, #3a2414 0%, #1a0e07 70%, #0b0603 100%);
-  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.8);
+    /* pregos de latão da borda */
+    radial-gradient(circle at 45px 7px, #f0d28a 0 1.5px, #9a6f2a 2.5px, transparent 3.5px) 0 0 / 90px 14px repeat-x,
+    /* borda do balcão (madeira clara) */
+    linear-gradient(#c9a066 0, #8a5a2b 38%, #4b2b13 82%, #150a04 86%, #150a04 100%) 0 0 / 100% 14px no-repeat,
+    /* sombra embaixo da borda */
+    linear-gradient(rgba(0, 0, 0, 0.6), transparent) 0 14px / 100% 28px no-repeat,
+    /* nós da madeira */
+    radial-gradient(ellipse 36px 20px at 17% 58%, rgba(14, 6, 2, 0.6) 0 28%, rgba(95, 52, 22, 0.28) 30% 52%, transparent 58%),
+    radial-gradient(ellipse 30px 17px at 74% 82%, rgba(14, 6, 2, 0.55) 0 28%, rgba(95, 52, 22, 0.25) 30% 52%, transparent 58%),
+    radial-gradient(ellipse 26px 15px at 90% 36%, rgba(14, 6, 2, 0.5) 0 28%, rgba(95, 52, 22, 0.22) 30% 52%, transparent 58%),
+    /* luz de lampião sobre a mesa */
+    radial-gradient(ellipse 65% 75% at 50% 28%, rgba(255, 190, 100, 0.22), transparent 72%),
+    /* cantos mais escuros */
+    radial-gradient(ellipse at 50% 40%, transparent 52%, rgba(0, 0, 0, 0.7) 100%),
+    /* frestas entre as tábuas */
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0 2px, rgba(255, 215, 160, 0.07) 2px 4px, transparent 4px 140px),
+    /* cada tábua com um tom diferente */
+    repeating-linear-gradient(90deg,
+      rgba(125, 72, 30, 0.20) 0 140px,
+      rgba(62, 32, 13, 0.22) 140px 280px,
+      rgba(105, 58, 24, 0.12) 280px 420px,
+      rgba(44, 22, 9, 0.20) 420px 560px),
+    /* veios da madeira */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='w' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.28 0.012' numOctaves='3' seed='7' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.10  0 0 0 0 0.05  0 0 0 0 0.02  0 0 0 1.1 -0.35'/></filter><rect width='100%' height='100%' filter='url(%23w)'/></svg>"),
+    #2b180b;
 }
 
 /* ---------- POLAROID ---------- */
