@@ -25,11 +25,11 @@
 
   // Velocidade dos alvos, em pixels por segundo: [mais lento, mais rápido].
   // Quanto maior o número, mais difícil de acertar.
-  const VELOCIDADE = [130, 240];
+  const VELOCIDADE = [240,310];
 
   // Palavrinhas que sobem depois de cada tiro
   const ACERTOS = ['BANG!', 'Na mosca!', 'Boa, cowboy!', 'Mira de ouro!'];
-  const ERROS = ['Errou!', 'Quase!', 'Só ar...'];
+  const ERROS = ['Errou!', 'Quase!', 'Ops!'];
 
   /* ========================================================== */
 
