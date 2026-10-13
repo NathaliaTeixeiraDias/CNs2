@@ -91,7 +91,7 @@ html, body {
 .topo h1 {
   font-size: clamp(1.05rem, 3.2vw, 1.9rem);
   font-weight: 800;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.1em;
   color: var(--ouro);
   text-shadow: 0 0 14px rgba(242, 193, 78, 0.55);
 }
