@@ -21,7 +21,8 @@
     const lista = Promise.all([
       document.fonts.load('40px Caveat'),
       document.fonts.load('40px "DM Serif Display"'),
-      document.fonts.load('40px "Special Elite"')
+      document.fonts.load('40px "Special Elite"'),
+      document.fonts.load('40px minhaletra')
     ]).catch(() => {});
     const limite = new Promise((ok) => setTimeout(ok, 3000));   // não trava se a internet estiver lenta
     return Promise.race([lista, limite]);

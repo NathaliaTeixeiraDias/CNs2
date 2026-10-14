@@ -13,7 +13,7 @@
 }
 @font-face {
     font-family: 'minhaletra';
-    src: url(fontes/MinhaLetra-Regular.ttf);
+    src: url('fontes/Minhaletra-Regular.ttf');
 }
 
 * {
@@ -366,8 +366,12 @@ button:focus-visible {
 
 .signature {
     color: var(--rust);
+    font-family: 'minhaletra', cursive;
+    font-style: normal;
     font-size: 1.15em;
 }
+
+.signature em { font-style: normal; }
 
 .signature span {
     display: block;
