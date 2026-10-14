@@ -1,6 +1,9 @@
 (function () {
   'use strict';
 
+  // carrega a fonte do "RASPE AQUI" desde o início, antes de ser desenhada
+if (document.fonts && document.fonts.load) document.fonts.load('20px Rye');
+
   /* ==========================================================
      CONFIGURAÇÃO — é só aqui que você mexe
      ========================================================== */
@@ -17,7 +20,7 @@
   const FOTOS = [
     { src: 'imagens/fotos/foto3.jpg', legenda: 'Modo "fome" ativado.' },
     { frase: 'A distância é só um detalhe. Eu escolho você de qualquer lugar.', legenda: 'Verso opcional: pode deixar vazio.' },
-    { src: 'imagens/fotos/foto5.jpg', legenda: 'Foragido do bom senso.' },
+    { frase: 'Você é o meu valentine', legenda: 'Verso opcional: pode deixar vazio.' },
     { src: 'imagens/fotos/foto6.jpg', legenda: 'Procurado: por mim, todo dia.' },
     { src: 'imagens/fotos/foto7.jpg', legenda: 'Esse olhar quando eu pego a última batata.' },
     { frase: 'Te amo mais do que meme bom. E olha que eu amo meme.' }

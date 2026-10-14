@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1410">
+    <title>Uma carta para você</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Serif+Display:ital@0;1&family=Special+Elite&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="pag04.css">
+</head>
+<body>
+    <main class="experience">
+        <div class="book-stage">
+            <!-- O livro é montado pelo script.js a partir das páginas do <template> abaixo -->
+            <div id="book" class="book" aria-label="Diário interativo. Puxe a lingueta para abrir; toque à direita para avançar e à esquerda para voltar."></div>
+        </div>
+    </main>
+
+    <!--
+        PÁGINAS DO DIÁRIO (na ordem do livro).
+        - data-deco = página "de enfeite" (forro das capas e página em branco).
+          Ela aparece no livro aberto em duas páginas, mas é pulada no celular.
+        - Se quiser acrescentar páginas, mantenha o total de faces PAR
+          (cada folha tem frente e verso).
+    -->
+    <template id="faces">
+
+        <!-- CAPA -->
+        <article class="face leather front-cover" aria-label="Capa">
+            <div class="cover-frame"></div>
+            <button class="leather-strap" type="button" aria-label="Abrir o diário" title="Abrir o diário">
+                <span class="strap-tail" aria-hidden="true"></span>
+                <span class="strap-loop" aria-hidden="true"></span>
+            </button>
+        </article>
+
+        <!-- FORRO DA CAPA (primeira coisa que aparece ao abrir, à esquerda) -->
+        <article class="face paper endpaper" data-deco></article>
+
+        <!-- DEDICATÓRIA (primeira folha, à direita) -->
+        <article class="face paper">
+            <div class="page-content inside-note">
+                <span class="eyebrow">Pertence a</span>
+                <p class="owner-name">Você.</p>
+                <span class="rule-mark" aria-hidden="true">✳</span>
+                <p class="small-note">E a todas as aventuras que ainda vamos viver.</p>
+            </div>
+            <span class="page-number">—</span>
+        </article>
+
+        <!-- 01 -->
+        <article class="face paper">
+            <div class="page-content journal-content">
+                <p class="entry-date">Uma carta, sem data</p>
+                <h2>Meu amor,</h2>
+                <p>Se eu pudesse guardar um instante dentro destas páginas, escolheria um daqueles em que você está por perto e, por um momento, o mundo inteiro parece mais leve.</p>
+                <p>Este diário é pequeno perto de tudo o que eu queria dizer, mas cada palavra aqui é sua.</p>
+            </div>
+            <span class="page-number">01</span>
+        </article>
+
+        <!-- 02 -->
+        <article class="face paper">
+            <div class="page-content journal-content">
+                <p class="entry-date">Anotação de viagem</p>
+                <h2>Nosso caminho</h2>
+                <p>A vida nem sempre escolhe estradas fáceis. Ainda assim, atravessar qualquer distância fica melhor quando sei que existe você do outro lado.</p>
+                <p>Obrigada por ser meu lugar seguro, minha risada favorita e a companhia que eu escolheria em qualquer jornada.</p>
+            </div>
+            <span class="page-number">02</span>
+        </article>
+
+        <!-- 03 -->
+        <article class="face paper">
+            <div class="page-content journal-content">
+                <p class="entry-date">Memória guardada</p>
+                <h2>O que fica</h2>
+                <p>Não são os grandes acontecimentos que fazem uma vida bonita. São os detalhes: nossas conversas, os planos improvisados, o jeito que você transforma um dia comum em lembrança.</p>
+                <p>Eu guardo tudo isso com cuidado, como quem dobra uma carta importante e leva no bolso.</p>
+            </div>
+            <span class="page-number">03</span>
+        </article>
+
+        <!-- 04 (foto) -->
+        <article class="face paper photo-page">
+            <div class="page-content journal-content">
+                <p class="entry-date">Um pedaço do horizonte</p>
+                <figure class="memory-photo">
+                    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&amp;fit=crop&amp;w=900&amp;q=82" alt="Paisagem ampla ao entardecer, como uma estrada aberta no horizonte">
+                    <figcaption>Em qualquer lugar, se for com você.</figcaption>
+                </figure>
+                <p class="photo-note">Ainda temos tanto mundo para descobrir.</p>
+            </div>
+            <span class="page-number">04</span>
+        </article>
+
+        <!-- 05 -->
+        <article class="face paper">
+            <div class="page-content journal-content">
+                <p class="entry-date">Promessa de quem te ama</p>
+                <h2>Eu prometo</h2>
+                <p>Prometo continuar escolhendo você nos dias tranquilos e nos dias difíceis. Prometo ouvir, cuidar, rir junto e encontrar um jeito de fazer as pazes depois de qualquer tempestade.</p>
+                <p>Não posso prometer uma estrada sem curvas. Posso prometer que quero percorrê-la ao seu lado.</p>
+            </div>
+            <span class="page-number">05</span>
+        </article>
+
+        <!-- 06 -->
+        <article class="face paper">
+            <div class="page-content journal-content final-letter">
+                <p class="entry-date">Na última página, por enquanto</p>
+                <h2>Feliz aniversário</h2>
+                <p>Que o seu novo ano venha cheio de motivos para sorrir, lugares bonitos e sonhos que finalmente encontram o caminho de casa.</p>
+                <p>Eu te amo mais do que cabe neste diário.</p>
+                <p class="signature">Sempre sua, <span>com todo o meu amor.</span></p>
+            </div>
+            <span class="page-number">06</span>
+        </article>
+
+        <!-- PÁGINA EM BRANCO (verso da última folha) -->
+        <article class="face paper" data-deco>
+            <div class="page-content journal-content"></div>
+        </article>
+
+        <!-- FORRO DA CONTRACAPA -->
+        <article class="face paper endpaper" data-deco></article>
+
+        <!-- CONTRACAPA -->
+        <article class="face leather back-cover" aria-label="Contracapa">
+            <div class="cover-frame back-frame">
+                <span class="back-star" aria-hidden="true">✳</span>
+                <p>Continua...</p>
+                <span class="back-caption">Nossa próxima aventura espera lá fora.</span>
+            </div>
+        </article>
+
+    </template>
+
+    <script src="pag04.js"></script>
+</body>
+</html>

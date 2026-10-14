@@ -117,19 +117,59 @@ html, body {
   color: var(--ouro);
 }
 
-.botao {
+/* ---------- botão "Continuar": placa de latão ---------- */
+/* ---------- botão "Continuar": contorno fino dourado ---------- */
+#continuar {
   pointer-events: auto;
-  padding: 9px 28px;
-  border: 2px solid var(--ouro);
-  border-radius: 999px;
-  background: rgba(120, 30, 20, 0.4);
-  color: var(--creme);
-  text-decoration: none;
-  font-size: 0.85rem;
-  letter-spacing: 0.16em;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 28px;
+  font-family: 'hapnab';
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  box-shadow: 0 0 16px rgba(242, 193, 78, 0.55), inset 0 0 12px rgba(242, 193, 78, 0.25);
-  animation: pulso 2s ease-in-out infinite;
+  text-decoration: none;
+  color: var(--ouro);
+  background: rgba(20, 8, 4, 0.55);
+  border: 1px solid rgba(242, 193, 78, 0.75);
+  border-radius: 999px;
+  cursor: pointer;
+  animation: respirar 2.6s ease-in-out infinite;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+#continuar::after {
+  content: "→";
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+#continuar:hover {
+  background: var(--ouro);
+  color: #2a0f08;
+  border-color: var(--ouro);
+}
+
+#continuar:hover::after { transform: translateX(4px); }
+
+@keyframes respirar {
+  0%, 100% { box-shadow: 0 0 0 rgba(242, 193, 78, 0), inset 0 0 0 rgba(242, 193, 78, 0); }
+  50%      { box-shadow: 0 0 18px rgba(242, 193, 78, 0.35), inset 0 0 10px rgba(242, 193, 78, 0.12); }
+}
+
+#continuar::after {
+  content: "→";
+  font-size: 1.2em;
+}
+
+#continuar:hover  { transform: translateY(-2px) scale(1.04); filter: brightness(1.08); }
+#continuar:active { transform: translateY(1px) scale(0.98); }
+
+@keyframes pulso-placa {
+  0%, 100% { box-shadow: 0 0 0 2px var(--ouro), 0 6px 14px rgba(0, 0, 0, 0.6), 0 0 12px rgba(242, 193, 78, 0.4); }
+  50%      { box-shadow: 0 0 0 2px var(--ouro), 0 6px 14px rgba(0, 0, 0, 0.6), 0 0 28px rgba(242, 193, 78, 0.9); }
 }
 
 @keyframes pulso {
@@ -482,4 +522,36 @@ canvas.raspa.limpo { opacity: 0; pointer-events: none; }
   text-transform: uppercase;
   color: rgba(242, 193, 78, 0.45);
   pointer-events: none;
+}
+
+/* ---------- aviso na mesa vazia ---------- */
+.aviso-mesa {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--topo-h) + var(--gal-h) + 25%);
+  z-index: 6;
+  text-align: center;
+  pointer-events: none;
+  font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(242, 193, 78, 0.5);
+}
+
+/* some quando a mesa ganha a primeira polaroid */
+#mesa:not(:empty) ~ .aviso-mesa { display: none; }
+
+/* ---------- luz de lampião ---------- */
+.luz-mesa {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--topo-h) + var(--gal-h));
+  bottom: 0;
+  z-index: 6;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 20%, rgba(255, 190, 90, 0.16), transparent 70%),
+    radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.5) 100%);
 }

@@ -1,0 +1,448 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    color-scheme: dark;
+    --dur: 900ms;                              /* duração de cada virada de página */
+    --ease: cubic-bezier(0.645, 0.045, 0.355, 1);
+    --paper: #f1e8d1;
+    --ink: #2d2419;
+    --muted-ink: #796c55;
+    --brass: #c7a56a;
+    --rust: #8c4535;
+    --rule: rgba(139, 112, 72, 0.3);           /* cor das linhas do caderno */
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :root { --dur: 1ms; }
+}
+
+html,
+body {
+    min-width: 320px;
+    min-height: 100%;
+}
+
+/* ---------- FUNDO ---------- */
+body {
+    background-color: #070e0b;
+    background-image: radial-gradient(ellipse at 50% 40%, #17291f 0%, #0b1410 58%, #060c09 100%);
+    background-attachment: fixed;
+    color: #f3ead7;
+    font-family: 'Special Elite', Georgia, serif;
+    overflow-x: hidden;
+}
+
+/* Para usar uma IMAGEM de fundo: apague o bloco "body" acima da linha
+   "FUNDO" (só as 3 propriedades de background) ou sobrescreva assim:
+
+body {
+    background-image:
+        linear-gradient(rgba(5, 10, 8, 0.8), rgba(5, 10, 8, 0.9)),
+        url('imagens/fundo.jpg');
+    background-size: cover;
+    background-position: center;
+}
+*/
+
+button { color: inherit; font: inherit; }
+
+button:focus-visible {
+    outline: 2px solid #f2d49c;
+    outline-offset: 4px;
+}
+
+.experience {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: 18px;
+    overflow: hidden;
+}
+
+/* ---------- O LIVRO ---------- */
+/* --pw (largura de uma página) e --ph (altura) vêm do script.js.
+   Tudo dentro do livro é medido em "u" = 1% da largura da página. */
+.book {
+    --u: calc(var(--pw) / 100);
+    /* tamanhos do texto (modo duas páginas) */
+    --fs: 4.3;       /* letra do diário */
+    --lhm: 6.2;      /* altura de cada linha do caderno */
+    --h2: 6.4;       /* títulos */
+    --meta: 2.4;     /* datas e números de página */
+    --lh: calc(var(--u) * var(--lhm));
+
+    position: relative;
+    width: calc(var(--pw) * 2);
+    height: var(--ph);
+    perspective: calc(var(--pw) * 6);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform var(--dur) var(--ease);
+}
+
+/* celular: uma página por vez, letra um pouco maior */
+.book[data-mode='single'] {
+    --fs: 5.2;
+    --lhm: 7.4;
+    --h2: 7.4;
+    --meta: 2.9;
+    width: var(--pw);
+}
+
+/* livro fechado fica centralizado na tela */
+.book[data-mode='double'][data-state='front'] { transform: translateX(-25%); }
+.book[data-mode='double'][data-state='back']  { transform: translateX(25%); }
+
+/* durante a montagem, sem animação */
+.book.no-anim,
+.book.no-anim * {
+    transition: none !important;
+    animation: none !important;
+}
+
+.book-shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+    box-shadow: 0 26px 70px rgba(0, 0, 0, 0.6), 0 4px 14px rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+    transition: left var(--dur) var(--ease), width var(--dur) var(--ease);
+}
+
+.book[data-mode='double'][data-state='front'] .book-shadow { left: 50%; width: 50%; }
+.book[data-mode='double'][data-state='back']  .book-shadow { left: 0;   width: 50%; }
+
+/* ---------- FOLHAS (viram em volta da lombada) ---------- */
+.leaf {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    transition: transform var(--dur) var(--ease);
+}
+
+.book[data-mode='single'] .leaf {
+    left: 0;
+    width: 100%;
+}
+
+.leaf.flipped { transform: rotateY(-180deg); }
+
+.face {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.face-back { transform: rotateY(180deg); }
+
+/* sombra suave que passa pela página enquanto ela vira */
+.shade {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.right-page .shade { background: linear-gradient(90deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.05)); }
+.left-page .shade  { background: linear-gradient(270deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.05)); }
+
+.leaf.turning .shade { animation: shade var(--dur) ease-in-out; }
+
+@keyframes shade {
+    0%   { opacity: 0; }
+    50%  { opacity: 0.7; }
+    100% { opacity: 0; }
+}
+
+/* ---------- PÁGINAS DE PAPEL ---------- */
+.paper {
+    --page-bg: var(--paper);
+    background-color: var(--page-bg);
+    color: var(--ink);
+    box-shadow: inset 0 0 26px rgba(91, 66, 34, 0.12);
+}
+
+/* moldura fininha */
+.paper::before {
+    position: absolute;
+    inset: calc(var(--u) * 2.8);
+    border: 1px solid rgba(136, 100, 52, 0.2);
+    content: '';
+    pointer-events: none;
+}
+
+/* sombra perto da lombada */
+.paper::after,
+.leather::after {
+    position: absolute;
+    inset: 0;
+    content: '';
+    pointer-events: none;
+}
+
+.paper.right-page::after  { background: linear-gradient(90deg,  rgba(70, 45, 15, 0.28), transparent 13%); }
+.paper.left-page::after   { background: linear-gradient(270deg, rgba(70, 45, 15, 0.28), transparent 13%); }
+
+.endpaper {
+    background-color: #e0d3b0;
+    background-image: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.18), rgba(110, 80, 35, 0.12));
+}
+
+.endpaper::before { display: none; }
+
+.photo-page { --page-bg: #e7ddc4; background-color: var(--page-bg); }
+
+.page-content {
+    position: absolute;
+    z-index: 1;
+    top: calc(var(--u) * 9);
+    right: calc(var(--u) * 9);
+    bottom: calc(var(--u) * 9);
+    left: calc(var(--u) * 9);
+    overflow: hidden;
+}
+
+.page-number {
+    position: absolute;
+    z-index: 1;
+    bottom: calc(var(--u) * 4.4);
+    color: var(--muted-ink);
+    font-size: calc(var(--u) * var(--meta));
+}
+
+.right-page .page-number { right: calc(var(--u) * 9); }
+.left-page .page-number  { left: calc(var(--u) * 9); }
+
+/* ---------- DEDICATÓRIA ---------- */
+.inside-note {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.eyebrow {
+    color: var(--rust);
+    font-size: calc(var(--u) * var(--meta));
+    text-transform: uppercase;
+}
+
+.owner-name {
+    margin: calc(var(--u) * 2.4) 0 calc(var(--u) * 1.2);
+    font-family: 'Caveat', cursive;
+    font-size: calc(var(--u) * 11);
+    line-height: 1;
+}
+
+.rule-mark {
+    margin: calc(var(--u) * 3) 0;
+    color: var(--rust);
+}
+
+.small-note {
+    max-width: 80%;
+    color: var(--muted-ink);
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: calc(var(--u) * 3.9);
+    font-style: italic;
+    line-height: 1.5;
+}
+
+/* ---------- PÁGINAS DO DIÁRIO (texto sobre as linhas) ---------- */
+/* Toda altura de linha é múltiplo de --lh, então o texto
+   assenta exatamente em cima das linhas do caderno. */
+.journal-content {
+    font-family: 'Caveat', cursive;
+    font-size: calc(var(--u) * var(--fs));
+    line-height: var(--lh);
+    background-image: linear-gradient(to bottom, transparent calc(100% - 1px), var(--rule) calc(100% - 1px));
+    background-size: 100% var(--lh);
+}
+
+.entry-date {
+    display: block;
+    height: var(--lh);
+    margin: 0;
+    color: var(--rust);
+    font-family: 'Special Elite', Georgia, serif;
+    font-size: calc(var(--u) * var(--meta));
+    letter-spacing: 0.04em;
+    line-height: var(--lh);
+    text-transform: uppercase;
+}
+
+.journal-content h2 {
+    width: 100%;
+    height: calc(var(--lh) * 2);
+    margin: 0;
+    background-color: var(--page-bg);   /* esconde a linha do caderno atrás do título */
+    border-bottom: 1px solid rgba(140, 69, 53, 0.45);
+    color: #513729;
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: calc(var(--u) * var(--h2));
+    font-weight: 400;
+    line-height: calc(var(--lh) * 2 - 1px);
+}
+
+.journal-content p {
+    margin: 0 0 var(--lh);
+}
+
+.journal-content .entry-date { margin: 0; }
+
+/* foto colada (altura = 9 linhas, para não desalinhar o resto) */
+.memory-photo {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: calc(var(--lh) * 9);
+    margin: 0 0 var(--lh);
+    padding: calc(var(--u) * 1.6) calc(var(--u) * 1.6) 0;
+    background: #fffaf0;
+    box-shadow: 0 4px 12px rgba(59, 39, 20, 0.2);
+    transform: rotate(-1.5deg);
+}
+
+.memory-photo img {
+    display: block;
+    flex: 1;
+    width: 100%;
+    min-height: 0;
+    object-fit: cover;
+    filter: sepia(0.2) saturate(0.82);
+}
+
+.memory-photo figcaption {
+    display: grid;
+    flex: none;
+    height: calc(var(--lh) * 1.8);
+    place-items: center;
+    color: #675640;
+    font-size: 1.05em;
+    line-height: 1;
+    text-align: center;
+}
+
+.journal-content .photo-note {
+    color: #513729;
+    text-align: center;
+}
+
+.signature {
+    color: var(--rust);
+    font-size: 1.15em;
+}
+
+.signature span {
+    display: block;
+    color: var(--ink);
+    font-size: 0.85em;
+}
+
+/* ---------- CAPAS DE COURO ---------- */
+.leather {
+    background-color: #6b392c;
+    background-image:
+        repeating-linear-gradient(16deg, transparent 0 17px, rgba(26, 16, 12, 0.08) 17px 19px),
+        linear-gradient(135deg, #85513a, #593528 62%, #39281f);
+    border: 5px solid #412e23;
+    color: #e7d3a5;
+}
+
+.front-cover::after { background: linear-gradient(90deg,  rgba(0, 0, 0, 0.4), transparent 12%); }
+.back-cover::after  { background: linear-gradient(270deg, rgba(0, 0, 0, 0.4), transparent 12%); }
+
+.book[data-mode='single'] .back-cover::after { background: linear-gradient(90deg, rgba(0, 0, 0, 0.4), transparent 12%); }
+
+/* costura */
+.cover-frame {
+    position: absolute;
+    inset: calc(var(--u) * 4.5);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid rgba(220, 190, 128, 0.55);
+    outline: 1px solid rgba(220, 190, 128, 0.22);
+    outline-offset: 4px;
+    text-align: center;
+}
+
+.back-frame { gap: calc(var(--u) * 5); }
+
+.back-star {
+    color: var(--brass);
+    font-size: calc(var(--u) * 4.6);
+}
+
+.back-frame p {
+    color: #f1dfb4;
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: calc(var(--u) * 8.4);
+}
+
+.back-caption {
+    max-width: 72%;
+    color: #d3bb88;
+    font-size: calc(var(--u) * 2.1);
+    letter-spacing: 0.12em;
+    line-height: 1.7;
+    text-transform: uppercase;
+}
+
+/* ---------- LINGUETA DE COURO ---------- */
+.leather-strap {
+    position: absolute;
+    z-index: 4;
+    top: 49%;
+    right: 0;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition: transform 220ms ease, opacity 220ms ease;
+}
+
+.strap-tail {
+    width: calc(var(--u) * 8);
+    height: calc(var(--u) * 7);
+    border: 1px solid #c39a5a;
+    border-right: 0;
+    background: #75412d;
+    clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%);
+}
+
+.strap-loop {
+    width: calc(var(--u) * 7.5);
+    height: calc(var(--u) * 12.5);
+    border: 3px double #d0ad6e;
+    border-radius: 5px 0 0 5px;
+    background: #513126;
+}
+
+.leather-strap:hover { transform: translate(3px, -50%); }
+
+.leather-strap.pulling {
+    opacity: 0;
+    transform: translate(24px, -50%) rotate(5deg);
+}
