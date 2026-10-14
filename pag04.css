@@ -1,3 +1,21 @@
+@font-face {
+    font-family:'chineserock' ;
+    src: url(fontes/chinese\ rocks\ rg.otf);
+}
+
+@font-face {
+    font-family: 'hapna';
+    src: url(fontes/HapnaSlabSerif-Regular.ttf);
+}
+@font-face {
+    font-family: 'hapnab';
+    src: url(fontes/HapnaSlabSerif-Bold.ttf);
+}
+@font-face {
+    font-family: 'minhaletra';
+    src: url(fontes/MinhaLetra-Regular.ttf);
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -32,7 +50,8 @@ body {
     background-image: radial-gradient(ellipse at 50% 40%, #17291f 0%, #0b1410 58%, #060c09 100%);
     background-attachment: fixed;
     color: #f3ead7;
-    font-family: 'Special Elite', Georgia, serif;
+    font-family: 'hapnab', Georgia, serif;
+    font-size: 2rem;
     overflow-x: hidden;
 }
 

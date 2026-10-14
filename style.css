@@ -177,7 +177,7 @@ main.revelado {
 }
 
 .rotulo-senha {
-  font-family: 'EB Garamond', serif;
+  font-family: 'hapnab', serif;
   font-style: italic;
   font-size: 15px;
   color: #cdbb90;
@@ -198,7 +198,7 @@ main.revelado {
   background: rgba(10, 6, 2, .5);
   border: 1px solid var(--areia);
   color: var(--areia);
-  font-family: 'EB Garamond', serif;
+  font-family: 'hapnab', serif;
 }
 
 .form-senha input:focus {

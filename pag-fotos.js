@@ -4,33 +4,24 @@
   // carrega a fonte do "RASPE AQUI" desde o início, antes de ser desenhada
 if (document.fonts && document.fonts.load) document.fonts.load('20px Rye');
 
-  /* ==========================================================
-     CONFIGURAÇÃO — é só aqui que você mexe
-     ========================================================== */
-
-  // Para onde vai o botão "Continuar" (a página do diário)
+  
   const PROXIMA_PAGINA = 'pag04.html';
 
-  // Uma linha por polaroid. Quantas quiser: o número de alvos acompanha a lista.
-  // Cada uma pode ser FOTO ou FRASE (misture como quiser):
-  //   src     = caminho da foto (ex.: 'imagens/fotos/foto1.jpg')
-  //   frase   = texto especial que aparece ao raspar (use no lugar do src)
-  //   legenda = o que aparece no verso da polaroid (opcional)
-  // Enquanto a foto não existir na pasta, aparece uma imagem de exemplo.
   const FOTOS = [
-    { src: 'imagens/fotos/foto3.jpg', legenda: 'Modo "fome" ativado.' },
+    { src: 'imagens/belo.jpg', legenda: 'Modo "fome" ativado.' },
     { frase: 'A distância é só um detalhe. Eu escolho você de qualquer lugar.', legenda: 'Verso opcional: pode deixar vazio.' },
     { frase: 'Você é o meu valentine', legenda: 'Verso opcional: pode deixar vazio.' },
-    { src: 'imagens/fotos/foto6.jpg', legenda: 'Procurado: por mim, todo dia.' },
-    { src: 'imagens/fotos/foto7.jpg', legenda: 'Esse olhar quando eu pego a última batata.' },
-    { frase: 'Te amo mais do que meme bom. E olha que eu amo meme.' }
+    { src: 'imagens/pink.jpg', legenda: 'Essa eu não poderia deixar de fora, desculpa.' },
+    { src: 'fontes/catred.jpg', legenda: 'Parado, gatinho. Passando pra roubar seu coração.' },
+    { frase: 'Apesar de você estar longe dos meus olhos, você nunca está longe dos meus pensamentos e do meu coração.' }
   ];
 
-  // Velocidade dos alvos, em pixels por segundo: [mais lento, mais rápido].
-  // Quanto maior o número, mais difícil de acertar.
+  // Velocidade dos alvos, em pixels por segundo: 
+  
   const VELOCIDADE = [240,310];
 
   // Palavrinhas que sobem depois de cada tiro
+
   const ACERTOS = ['BANG!', 'Na mosca!', 'Boa, cowboy!', 'Mira de ouro!'];
   const ERROS = ['Errou!', 'Quase!', 'Ops!'];
 

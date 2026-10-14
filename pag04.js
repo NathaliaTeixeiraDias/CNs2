@@ -3,15 +3,10 @@
 
   const book = document.getElementById('book');
   const tpl = document.getElementById('faces');
-  const templates = Array.from(tpl.content.querySelectorAll('.face'));
-  const LAST = templates.length - 1;
-
-  // índices das páginas que existem no modo celular (sem as "de enfeite")
-  const SINGLE_IDX = templates
-    .map((f, i) => i)
-    .filter((i) => !templates[i].hasAttribute('data-deco'));
+  const originalTemplates = Array.from(tpl.content.querySelectorAll('.face'));
 
   let mode = null;      // 'double' (duas páginas) ou 'single' (celular)
+  let currentFaces = [];
   let leaves = [];      // folhas do livro
   let k = 0;            // quantas folhas já foram viradas
   let maxK = 0;
@@ -23,6 +18,20 @@
     parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--dur')) || 900;
 
   const wantedMode = () => (window.innerWidth <= 720 ? 'single' : 'double');
+
+  function facesFor(m) {
+    const faces = typeof window.facesPara === 'function'
+      ? window.facesPara(m)
+      : originalTemplates.map((face) => face.cloneNode(true));
+    return m === 'single' ? faces.filter((face) => !face.hasAttribute('data-deco')) : faces;
+  }
+
+  function faceKey(face) {
+    if (face.dataset.numerada) return 'page:' + face.querySelector('.page-number').textContent;
+    if (face.hasAttribute('aria-label')) return 'label:' + face.getAttribute('aria-label');
+    if (face.querySelector('.inside-note')) return 'dedication';
+    return null;
+  }
 
   // ---------- tamanho ----------
   function sizeBook(m) {
@@ -43,12 +52,13 @@
     book.innerHTML = '';
     book.dataset.mode = m;
     sizeBook(m);
+    const faces = facesFor(m);
+    currentFaces = faces;
 
     const shadow = document.createElement('div');
     shadow.className = 'book-shadow';
     book.appendChild(shadow);
 
-    const faces = templates.map((f) => f.cloneNode(true));
     let groups;
 
     if (m === 'double') {
@@ -179,14 +189,21 @@
 
   // ---------- ao redimensionar / girar o celular ----------
   function faceIndexNow() {
-    if (mode === 'double') return k < leaves.length ? 2 * k : LAST;
-    return SINGLE_IDX[k];
+    if (mode === 'double') return k < leaves.length ? 2 * k : currentFaces.length - 1;
+    return k;
   }
 
   function kFromFace(m, fi) {
-    if (m === 'double') return fi >= LAST ? templates.length / 2 : Math.ceil(fi / 2);
-    const pos = SINGLE_IDX.findIndex((i) => i >= fi);
-    return pos === -1 ? SINGLE_IDX.length - 1 : pos;
+    const targetFaces = facesFor(m);
+    const currentFace = currentFaces[Math.max(0, Math.min(fi, currentFaces.length - 1))];
+    const key = currentFace && faceKey(currentFace);
+    const matchingIndex = key
+      ? targetFaces.findIndex((face) => faceKey(face) === key)
+      : -1;
+    const targetIndex = matchingIndex >= 0
+      ? matchingIndex
+      : Math.min(fi, targetFaces.length - 1);
+    return m === 'double' ? Math.ceil(targetIndex / 2) : targetIndex;
   }
 
   let timer;
