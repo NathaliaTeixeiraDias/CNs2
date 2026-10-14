@@ -17,17 +17,18 @@
     />
   </head>
   <body>
-     vídeo de fundo: sem "loop" agora, pra tocar uma vez só e poder terminar 
+    <!-- vídeo de fundo: sem "loop" agora, pra tocar uma vez só e poder terminar -->
     <video id="video-fundo" autoplay muted playsinline>
       <source src="vídeos/Design sem nome.mp4" type="video/mp4" />
     </video>
 
-     foto que aparece quando o vídeo termina 
+    <!-- foto que aparece quando o vídeo termina -->
     <img id="foto-fundo" src="imagens/rder2.jpg" alt="" />
- escurece e esquenta o tom do vídeo (e da foto), pra não lavar o texto 
+
+    <!-- escurece e esquenta o tom do vídeo (e da foto), pra não lavar o texto -->
     <div class="sobreposicao"></div>
 
-     clarão branco/laranja sincronizado com o tiro 
+    <!-- clarão branco/laranja sincronizado com o tiro -->
     <div id="flash"></div>
 
     <main>
@@ -35,7 +36,7 @@
       <p class="subtitulo">A estrada te espera, cavalheiro</p>
       <button class="botao" id="btn-entrar">Entrar</button>
 
-       começa escondido; aparece quando clica em "Entrar" 
+      <!-- começa escondido; aparece quando clica em "Entrar" -->
       <form id="form-senha" class="form-senha" hidden autocomplete="off">
         <label for="campo-login" class="rotulo-senha"
           >Seu nome, forasteiro</label
@@ -71,91 +72,4 @@
 
     <script src="script.js"></script>
   </body>
-</html> --->
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0b1410">
-    <title>Uma carta para você</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Serif+Display:ital@0;1&family=Special+Elite&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <main class="experience">
-        <div class="book-stage">
-            <!-- O livro é montado pelo script.js a partir das páginas do <template> abaixo -->
-            <div id="book" class="book" aria-label="Diário interativo. Puxe a lingueta para abrir; toque à direita para avançar e à esquerda para voltar."></div>
-        </div>
-    </main>
-
-    <!--
-        PÁGINAS DO DIÁRIO (na ordem do livro).
-        - data-deco = página "de enfeite" (forro das capas e página em branco).
-          Ela aparece no livro aberto em duas páginas, mas é pulada no celular.
-        - Se quiser acrescentar páginas, mantenha o total de faces PAR
-          (cada folha tem frente e verso).
-    -->
-    <template id="faces">
-
-        <!-- CAPA -->
-        <article class="face leather front-cover" aria-label="Capa">
-            <div class="cover-frame"></div>
-            <button class="leather-strap" type="button" aria-label="Abrir o diário" title="Abrir o diário">
-                <span class="strap-tail" aria-hidden="true"></span>
-                <span class="strap-loop" aria-hidden="true"></span>
-            </button>
-        </article>
-
-        <!-- FORRO DA CAPA (primeira coisa que aparece ao abrir, à esquerda) -->
-        <article class="face paper endpaper" data-deco></article>
-
-        <!-- DEDICATÓRIA (primeira folha, à direita) -->
-        <article class="face paper">
-            <div class="page-content inside-note">
-                <span class="eyebrow">Pertence a</span>
-                <p class="owner-name">Você.</p>
-                <span class="rule-mark" aria-hidden="true">✳</span>
-                <p class="small-note">E a todas as aventuras que ainda vamos viver.</p>
-            </div>
-            <span class="page-number">—</span>
-        </article>
-
-        <!-- AQUI ENTRAM AS PÁGINAS DA CARTA (o texto fica no <template id="carta">, mais abaixo) -->
-        <div data-carta></div>
-
-        <!-- PÁGINA EM BRANCO (só entra se faltar uma página para fechar o par) -->
-        <article class="face paper" data-deco data-par>
-            <div class="page-content journal-content"></div>
-        </article>
-
-        <!-- FORRO DA CONTRACAPA -->
-        <article class="face paper endpaper" data-deco></article>
-
-        <!-- CONTRACAPA -->
-        <article class="face leather back-cover" aria-label="Contracapa">
-            <div class="cover-frame back-frame">
-                <span class="back-star" aria-hidden="true">✳</span>
-                <p>Continua...</p>
-                <span class="back-caption">Nossa próxima aventura espera lá fora.</span>
-            </div>
-        </article>
-
-    </template>
-
-
-    <!--
-        A CARTA: escreva o texto aqui, sem se preocupar com o tamanho das páginas.
-        O paginar.js divide tudo sozinho, linha por linha, e numera as páginas.
-
-          <p class="entry-date">   começa uma página nova, com a "data" em cima
-          <h2>                     título
-          <p>                      parágrafo (pode ser enorme, ele continua na página seguinte)
-          <hr>                     força uma página nova
-          <article class="face ..."> uma página pronta (ex.: a página de foto)
-    
-    
+</html>
