@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Serif+Display:ital@0;1&family=Special+Elite&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="pag04.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <main class="experience">
@@ -50,77 +50,11 @@
             <span class="page-number">—</span>
         </article>
 
-        <!-- 01 -->
-        <article class="face paper">
-            <div class="page-content journal-content">
-                <p class="entry-date">Uma carta, sem data</p>
-                <h2>Meu amor,</h2>
-                <p>Se eu pudesse guardar um instante dentro destas páginas, escolheria um daqueles em que você está por perto e, por um momento, o mundo inteiro parece mais leve.</p>
-                <p>Este diário é pequeno perto de tudo o que eu queria dizer, mas cada palavra aqui é sua.</p>
-            </div>
-            <span class="page-number">01</span>
-        </article>
+        <!-- AQUI ENTRAM AS PÁGINAS DA CARTA (o texto fica no <template id="carta">, mais abaixo) -->
+        <div data-carta></div>
 
-        <!-- 02 -->
-        <article class="face paper">
-            <div class="page-content journal-content">
-                <p class="entry-date">Anotação de viagem</p>
-                <h2>Nosso caminho</h2>
-                <p>A vida nem sempre escolhe estradas fáceis. Ainda assim, atravessar qualquer distância fica melhor quando sei que existe você do outro lado.</p>
-                <p>Obrigada por ser meu lugar seguro, minha risada favorita e a companhia que eu escolheria em qualquer jornada.</p>
-            </div>
-            <span class="page-number">02</span>
-        </article>
-
-        <!-- 03 -->
-        <article class="face paper">
-            <div class="page-content journal-content">
-                <p class="entry-date">Memória guardada</p>
-                <h2>O que fica</h2>
-                <p>Não são os grandes acontecimentos que fazem uma vida bonita. São os detalhes: nossas conversas, os planos improvisados, o jeito que você transforma um dia comum em lembrança.</p>
-                <p>Eu guardo tudo isso com cuidado, como quem dobra uma carta importante e leva no bolso.</p>
-            </div>
-            <span class="page-number">03</span>
-        </article>
-
-        <!-- 04 (foto) -->
-        <article class="face paper photo-page">
-            <div class="page-content journal-content">
-                <p class="entry-date">Um pedaço do horizonte</p>
-                <figure class="memory-photo">
-                    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&amp;fit=crop&amp;w=900&amp;q=82" alt="Paisagem ampla ao entardecer, como uma estrada aberta no horizonte">
-                    <figcaption>Em qualquer lugar, se for com você.</figcaption>
-                </figure>
-                <p class="photo-note">Ainda temos tanto mundo para descobrir.</p>
-            </div>
-            <span class="page-number">04</span>
-        </article>
-
-        <!-- 05 -->
-        <article class="face paper">
-            <div class="page-content journal-content">
-                <p class="entry-date">Promessa de quem te ama</p>
-                <h2>Eu prometo</h2>
-                <p>Prometo continuar escolhendo você nos dias tranquilos e nos dias difíceis. Prometo ouvir, cuidar, rir junto e encontrar um jeito de fazer as pazes depois de qualquer tempestade.</p>
-                <p>Não posso prometer uma estrada sem curvas. Posso prometer que quero percorrê-la ao seu lado.</p>
-            </div>
-            <span class="page-number">05</span>
-        </article>
-
-        <!-- 06 -->
-        <article class="face paper">
-            <div class="page-content journal-content final-letter">
-                <p class="entry-date">Na última página, por enquanto</p>
-                <h2>Feliz aniversário</h2>
-                <p>Que o seu novo ano venha cheio de motivos para sorrir, lugares bonitos e sonhos que finalmente encontram o caminho de casa.</p>
-                <p>Eu te amo mais do que cabe neste diário.</p>
-                <p class="signature">Sempre sua, <span>com todo o meu amor.</span></p>
-            </div>
-            <span class="page-number">06</span>
-        </article>
-
-        <!-- PÁGINA EM BRANCO (verso da última folha) -->
-        <article class="face paper" data-deco>
+        <!-- PÁGINA EM BRANCO (só entra se faltar uma página para fechar o par) -->
+        <article class="face paper" data-deco data-par>
             <div class="page-content journal-content"></div>
         </article>
 
@@ -138,6 +72,55 @@
 
     </template>
 
-    <script src="pag04.js"></script>
+
+    <!--
+        A CARTA: escreva o texto aqui, sem se preocupar com o tamanho das páginas.
+        O paginar.js divide tudo sozinho, linha por linha, e numera as páginas.
+
+          <p class="entry-date">   começa uma página nova, com a "data" em cima
+          <h2>                     título
+          <p>                      parágrafo (pode ser enorme, ele continua na página seguinte)
+          <hr>                     força uma página nova
+          <article class="face ..."> uma página pronta (ex.: a página de foto)
+    -->
+    <template id="carta">
+
+        <!-- ===== MEU AMOR ===== -->
+        <p class="entry-date">Uma carta, sem data</p>
+        <h2>Meu amor,</h2>
+        <p>Hoje é o seu aniversário, e eu quis fazer algo simples, mas especial, para você, já que a distância não me permite estar aí ao seu lado. E não poderia ser apenas um texto qualquer, porque, quando chegou a minha vez, você também teve todo o capricho de preparar algo especial para mim. Quis retribuir esse carinho à minha maneira, deixando registrado um pedacinho do que você significa para mim.</p>
+        <p>Quero te desejar tudo de melhor que a vida pode oferecer: muita paz, amor, saúde e muuuuuito sucesso. Você merece cada coisa boa que conquistar. É inspirador, estudioso, inteligente, lindo e, acima de tudo, o amor da minha vida. Às vezes, acho que não existem adjetivos suficientes no mundo para descrever você, nem palavras capazes de explicar tudo o que sinto.</p>
+
+        <!-- ===== A MELHOR COISA ===== -->
+        <p class="entry-date">Sobre nós dois</p>
+        <h2>A melhor coisa</h2>
+        <p>A melhor coisa que me aconteceu foi te conhecer, me apaixonar por você e descobrir que, mesmo com o passar dos dias, ainda posso te amar um pouco mais. Talvez eu nem sempre consiga demonstrar, mas valorizo imensamente tudo o que você faz por mim: cada fim de semana que planejamos, cada jogo que compartilhamos e cada live que você fez só para que eu pudesse te assistir jogando. São detalhes que podem parecer pequenos, mas que guardo com muito carinho.</p>
+        <p>Se eu pudesse registrar toda a nossa história em uma única folha de papel, tenho certeza de que ela não seria suficiente. Faltariam páginas para todas as lembranças que ainda vamos construir, para os momentos que já vivemos e para tudo aquilo que ainda sonho em viver ao seu lado. E, se um dia eu pudesse folhear esse diário ao seu lado, queria que cada página nos lembrasse de como tudo começou e de como valeu a pena percorrer esse caminho juntos.</p>
+
+        <!-- ===== PORTO SEGURO ===== -->
+        <p class="entry-date">Anotação do coração</p>
+        <h2>Meu porto seguro</h2>
+        <p>Você se tornou meu porto seguro no meio da correria dos dias, meu lugar de paz quando a rotina pesa e a pessoa com quem quero compartilhar tanto os dias extraordinários quanto os mais comuns. Você é muito mais importante do que imagina e tem um coração de ouro. Sou feliz por poder conhecer esse seu lado e por ter encontrado em você alguém com quem quero dividir a vida.</p>
+
+        <!-- ===== A TRAVESSIA ===== -->
+        <p class="entry-date">Anotação de viagem</p>
+        <h2>A travessia</h2>
+        <p>Não sei quanto tempo vai levar até que tudo fique como queremos, sonhamos e planejamos. Sei que ainda existem quilômetros entre nós e que talvez o caminho não seja tão simples quanto gostaríamos. Mas eu quero continuar percorrendo essa estrada com você. A distância no mapa é apenas uma travessia temporária; o que estamos construindo é muito maior do que ela. Nosso plano é real, nossos sonhos são nossos, e quero continuar escolhendo você em cada etapa dessa jornada. Que a gente siga firme e unshaken, mesmo quando o caminho ficar difícil, sempre lembrando do motivo pelo qual começamos a percorrê-lo.</p>
+
+        <!-- ===== GRATIDÃO ===== -->
+        <p class="entry-date">Promessa de quem te ama</p>
+        <h2>Gratidão</h2>
+        <p>Deus foi muito generoso comigo ao colocar você na minha vida. Agradeço a Ele todos os dias, nas minhas orações, por ter cruzado nossos caminhos. Peço que continue te abençoando, iluminando suas escolhas e te dando força, sabedoria e saúde para conquistar tudo aquilo que deseja. Que esse novo ciclo seja repleto de felicidade, crescimento e realizações. E que, entre tantas coisas boas que a vida ainda tem para te oferecer, nunca te faltem motivos para sorrir.</p>
+
+        <!-- ===== FECHAMENTO ===== -->
+        <p class="entry-date">Na última página, por enquanto</p>
+        <h2>Feliz aniversário</h2>
+        <p>Você é meu parceiro de vida, meu porto seguro e minha pessoa favorita. E, se ainda temos tantas páginas em branco pela frente, fico feliz em saber que quero escrevê-las com você.</p>
+        <p class="signature">You're alright, partner. ❤️</p>
+
+    </template>
+
+    <script src="paginar.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

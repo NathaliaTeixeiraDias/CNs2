@@ -1,6 +1,5 @@
 // Diário sem bibliotecas: as folhas viram com CSS 3D, o JS só controla qual está virada.
-(function () {
-  'use strict';
+(window.cartaPronta || Promise.resolve()).then(function () {
 
   const book = document.getElementById('book');
   const tpl = document.getElementById('faces');
@@ -201,4 +200,4 @@
   });
 
   build(wantedMode(), 0);
-})();
+});
