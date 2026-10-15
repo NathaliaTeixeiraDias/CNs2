@@ -23,7 +23,7 @@
       document.fonts.load('40px "DM Serif Display"'),
       document.fonts.load('40px "Special Elite"'),
       document.fonts.load('40px minhaletra'),
-      document.fonts.load('40px Tangerine')
+      document.fonts.load('40px Kalam')
     ]).catch(() => {});
     const limite = new Promise((ok) => setTimeout(ok, 3000));   // não trava se a internet estiver lenta
     return Promise.race([lista, limite]);
@@ -167,6 +167,7 @@
 
   window.cartaPronta = fontesProntas().then(() => {
     cache.single = montar('single');
-    cache.double = montar('double');
+    c
+    ache.double = montar('double');
   });
 })();

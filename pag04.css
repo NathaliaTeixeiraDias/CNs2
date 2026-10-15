@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
 
 @font-face {
     font-family:'chineserock' ;
@@ -278,7 +278,7 @@ button:focus-visible {
 /* Toda altura de linha é múltiplo de --lh, então o texto
    assenta exatamente em cima das linhas do caderno. */
 .journal-content {
-    font-family: 'Tangerine', cursive;
+    font-family: 'Kalam', cursive;
     font-size: calc(var(--u) * var(--fs));
     line-height: var(--lh);
     background-image: linear-gradient(to bottom, transparent calc(100% - 1px), var(--rule) calc(100% - 1px));
