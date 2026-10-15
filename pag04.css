@@ -269,6 +269,18 @@ button:focus-visible {
     color: var(--rust);
 }
 
+.dedication-quote {
+    position: absolute;
+    right: 0;
+    bottom: calc(var(--u) * 2);
+    white-space: nowrap;
+    color: #51463a;
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: calc(var(--u) * 2.7);
+    line-height: 1.3;
+    text-align: right;
+}
+
 .small-note {
     max-width: 80%;
     color: var(--muted-ink);
@@ -316,8 +328,13 @@ button:focus-visible {
 }
 
 .journal-content p {
-    margin: 0 0 var(--lh);
+    margin: 0;
     text-indent: 1.2em;
+}
+
+.journal-content p {
+    position: relative;
+    top: 0.55em;   /* quanto o texto desce em direção à linha */
 }
 
 .journal-content .entry-date { margin: 0; }
@@ -471,4 +488,5 @@ button:focus-visible {
 .leather-strap.pulling {
     opacity: 0;
     transform: translate(24px, -50%) rotate(5deg);
+    
 }
