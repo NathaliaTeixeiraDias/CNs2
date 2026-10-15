@@ -490,3 +490,10 @@ button:focus-visible {
     transform: translate(24px, -50%) rotate(5deg);
     
 }
+.journal-content > span {
+    display: block;
+    margin-top: calc(var(--lh) * 2);   /* 2 linhas de espaço */
+}
+.journal-content p.signature {
+    margin-top: var(--lh);   /* 1 linha de espaço */
+}

@@ -276,4 +276,5 @@
     cache.single = montar('single');
     cache.double = montar('double');
   });
+  
 })();
