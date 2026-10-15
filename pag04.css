@@ -365,10 +365,10 @@ button:focus-visible {
     top: -0.2em;
     padding-left: 8%;
     color: var(--rust);
-    font-family: 'Kalam', cursive;
+    font-family: 'Kalam';
     font-style: italic;
     font-weight: 700;
-    font-size: 1em;
+    font-size: .0.5em;
     text-align: center;
     text-indent: 0, right;
 }

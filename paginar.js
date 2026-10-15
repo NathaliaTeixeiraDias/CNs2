@@ -98,7 +98,7 @@
     }
 
     function colocarParagrafo(modelo) {
-      if (modelo.classList.contains('signature')) {
+      if (modelo.classList.contains('signature') || modelo.classList.contains('closing-paragraph')) {
         colocarBloco(modelo.cloneNode(true));
         return;
       }
