@@ -45,6 +45,7 @@
     const paginas = [];   // artigos prontos (ou páginas inteiras vindas do HTML)
     let artigo = null;
     let conteudo = null;
+    let dataPendente = null;
 
     function novaPagina() {
       artigo = document.createElement('article');
@@ -83,35 +84,142 @@
     }
 
     function colocarParagrafo(modelo) {
-      const simples = modelo.children.length === 0;
-      if (!simples) return colocarBloco(modelo.cloneNode(true));   // com formatação interna: não divide
+      if (modelo.classList.contains('signature')) {
+        colocarBloco(modelo.cloneNode(true));
+        return;
+      }
 
-      let resto = modelo.textContent.split(/\s+/).filter(Boolean);
-      while (resto.length) {
+      const tokens = [];
+      const texto = [];
+      const walker = document.createTreeWalker(modelo, NodeFilter.SHOW_TEXT);
+      let no;
+      let inicioTexto = 0;
+      while ((no = walker.nextNode())) {
+        const indiceNo = texto.length;
+        const conteudoNo = no.nodeValue || '';
+        texto.push(conteudoNo);
+        Array.from(conteudoNo.matchAll(/\S+/g)).forEach((palavra) => {
+          tokens.push({
+            no: indiceNo,
+            texto: palavra[0],
+            inicio: inicioTexto + palavra.index,
+            fim: inicioTexto + palavra.index + palavra[0].length
+          });
+        });
+        inicioTexto += conteudoNo.length;
+      }
+
+      const textoCompleto = texto.join('');
+      if (!tokens.length) return;
+
+      function fragmento(inicio, fim) {
+        const paragrafo = modelo.cloneNode(true);
+        const nos = [];
+        const walker = document.createTreeWalker(paragrafo, NodeFilter.SHOW_TEXT);
+        let no;
+        while ((no = walker.nextNode())) nos.push(no);
+
+        nos.forEach((noTexto, indiceNo) => {
+          const selecionadas = [];
+          for (let i = inicio; i < fim; i += 1) {
+            if (tokens[i].no === indiceNo) selecionadas.push({ token: tokens[i], indice: i });
+          }
+          if (!selecionadas.length) {
+            noTexto.nodeValue = '';
+            return;
+          }
+
+          const primeira = selecionadas[0];
+          const ultima = selecionadas[selecionadas.length - 1];
+          let valor = selecionadas.map(({ token }) => token.texto).join(' ');
+          if (primeira.indice > inicio) {
+            const anterior = tokens[primeira.indice - 1];
+            if (/\s/.test(textoCompleto.slice(anterior.fim, primeira.token.inicio))) valor = ' ' + valor;
+          }
+          if (ultima.indice < fim - 1) {
+            const seguinte = tokens[ultima.indice + 1];
+            if (/\s/.test(textoCompleto.slice(ultima.token.fim, seguinte.inicio))) valor += ' ';
+          }
+          noTexto.nodeValue = valor;
+        });
+        return paragrafo;
+      }
+
+      let total = tokens.length;
+      let inicio = 0;
+      while (inicio < total) {
         if (!artigo) novaPagina();
-        const p = modelo.cloneNode(false);
+        let dataDaPagina = null;
+        if (dataPendente && !conteudo.childNodes.length) {
+          dataDaPagina = dataPendente;
+          conteudo.appendChild(dataDaPagina);
+          dataPendente = null;
+        }
+
+        let p = fragmento(inicio, total);
         conteudo.appendChild(p);
-        p.textContent = resto.join(' ');
         if (cabe()) return;
 
-        let lo = 0, hi = resto.length - 1;
+        let lo = inicio + 1;
+        let hi = total;
         while (lo < hi) {
           const meio = Math.ceil((lo + hi) / 2);
-          p.textContent = resto.slice(0, meio).join(' ');
+          const teste = fragmento(inicio, meio);
+          p.replaceWith(teste);
+          p = teste;
           if (cabe()) lo = meio; else hi = meio - 1;
         }
-        if (lo === 0) {
+        let fim = lo;
+        let prefixo = fragmento(inicio, fim);
+        p.replaceWith(prefixo);
+        p = prefixo;
+
+        if (!cabe()) {
           conteudo.removeChild(p);
-          if (conteudo.childNodes.length) { fechar(); continue; }   // tenta de novo numa página nova
-          lo = 1;                                                    // página vazia e nem 1 palavra cabe: força
-          const f = modelo.cloneNode(false);
-          f.textContent = resto[0];
-          conteudo.appendChild(f);
-        } else {
-          p.textContent = resto.slice(0, lo).join(' ');
+          if (dataDaPagina) {
+            conteudo.removeChild(dataDaPagina);
+            dataPendente = dataDaPagina;
+          }
+          if (conteudo.childNodes.length) {
+            fechar();
+            continue;
+          }
+          if (dataDaPagina) {
+            conteudo.appendChild(dataDaPagina);
+            dataPendente = null;
+          }
+          conteudo.appendChild(fragmento(inicio, inicio + 1));
+          inicio += 1;
+          fechar();
+          continue;
         }
-        resto = resto.slice(lo);
-        fechar();
+
+        if (fim < total && fim > inicio + 1) {
+          const lineHeight = parseFloat(getComputedStyle(conteudo).lineHeight);
+          while (fim > inicio + 1) {
+            const restoPagina = fragmento(fim, total);
+            conteudo.appendChild(restoPagina);
+            const linhasRestantes = restoPagina.offsetHeight / lineHeight;
+            conteudo.removeChild(restoPagina);
+            if (linhasRestantes >= 2) break;
+            fim -= 1;
+          }
+          if (fim !== lo) {
+            p.replaceWith(fragmento(inicio, fim));
+            p = conteudo.lastElementChild;
+          }
+        }
+
+        if (fim < total) {
+          inicio = fim;
+          fechar();
+          continue;
+        }
+        if (fim <= inicio) {
+          fechar();
+          continue;
+        }
+        return;
       }
     }
 
@@ -123,13 +231,14 @@
         fechar();
       } else if (el.classList.contains('entry-date')) {
         fechar();
-        colocarBloco(el.cloneNode(true));
+        dataPendente = el.cloneNode(true);
       } else if (el.tagName === 'P') {
         colocarParagrafo(el);
       } else {
         colocarBloco(el.cloneNode(true));
       }
     });
+    if (dataPendente) colocarBloco(dataPendente);
     fechar();
     document.body.removeChild(palco);
 

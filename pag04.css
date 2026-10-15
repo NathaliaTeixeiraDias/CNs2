@@ -295,7 +295,8 @@ button:focus-visible {
     margin: 0;
     color: var(--rust);
     font-family: 'Special Elite', Georgia, serif;
-    font-size: calc(var(--u) * var(--meta));
+    font-size: calc(var(--u) * var(--date-size));
+    font-weight: 700;
     letter-spacing: 0.04em;
     line-height: var(--lh);
     text-transform: uppercase;
@@ -316,6 +317,7 @@ button:focus-visible {
 
 .journal-content p {
     margin: 0 0 var(--lh);
+    text-indent: 1.2em;
 }
 
 .journal-content .entry-date { margin: 0; }
@@ -359,13 +361,14 @@ button:focus-visible {
 }
 
 .signature {
+    position: relative;
+    top: -0.2em;
     color: var(--rust);
-    font-family: 'minhaletra', cursive;
-    font-style: normal;
+    font-family: 'Kalam', cursive;
+    font-style: italic;
+    font-weight: 700;
     font-size: 1.15em;
 }
-
-.signature em { font-style: normal; }
 
 .signature span {
     display: block;
