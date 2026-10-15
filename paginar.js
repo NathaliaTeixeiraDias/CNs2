@@ -167,7 +167,6 @@
 
   window.cartaPronta = fontesProntas().then(() => {
     cache.single = montar('single');
-    c
-    ache.double = montar('double');
+    cache.double = montar('double');
   });
 })();
