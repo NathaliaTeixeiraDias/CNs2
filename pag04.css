@@ -55,18 +55,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Para usar uma IMAGEM de fundo: apague o bloco "body" acima da linha
-   "FUNDO" (só as 3 propriedades de background) ou sobrescreva assim:
-
-body {
-    background-image:
-        linear-gradient(rgba(5, 10, 8, 0.8), rgba(5, 10, 8, 0.9)),
-        url('imagens/fundo.jpg');
-    background-size: cover;
-    background-position: center;
-}
-*/
-
 button { color: inherit; font: inherit; }
 
 button:focus-visible {
