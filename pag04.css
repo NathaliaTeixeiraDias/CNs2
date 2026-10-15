@@ -373,7 +373,8 @@ button:focus-visible {
 .leather {
     background-color: #6b392c;
     background-image:
-        repeating-linear-gradient(16deg, transparent 0 17px, rgba(26, 16, 12, 0.08) 17px 19px),
+        radial-gradient(ellipse at 28% 22%, rgba(190, 124, 77, 0.16), transparent 48%),
+        radial-gradient(ellipse at 76% 82%, rgba(27, 14, 10, 0.2), transparent 55%),
         linear-gradient(135deg, #85513a, #593528 62%, #39281f);
     border: 5px solid #412e23;
     color: #e7d3a5;
