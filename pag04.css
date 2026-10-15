@@ -84,6 +84,8 @@ button:focus-visible {
     --lhm: 8.5;      /* altura de cada linha do caderno */
     --h2: ;       /* títulos */
     --meta: 2.4;     /* datas e números de página */
+    --date-size: 3;
+    --eyebrow: 3.2;
     --lh: calc(var(--u) * var(--lhm));
 
     position: relative;
@@ -101,6 +103,8 @@ button:focus-visible {
     --lhm: 10.5;
     --h2: 7.4;
     --meta: 2.9;
+    --date-size: 3.5;
+    --eyebrow: 3.8;
     width: var(--pw);
 }
 
@@ -232,7 +236,7 @@ button:focus-visible {
     z-index: 1;
     bottom: calc(var(--u) * 4.4);
     color: var(--muted-ink);
-    font-size: calc(var(--u) * var(--meta));
+    font-size: calc(var(--u) * var(--date-size));
 }
 
 .right-page .page-number { right: calc(var(--u) * 9); }
@@ -249,7 +253,7 @@ button:focus-visible {
 
 .eyebrow {
     color: var(--rust);
-    font-size: calc(var(--u) * var(--meta));
+    font-size: calc(var(--u) * var(--eyebrow));
     text-transform: uppercase;
 }
 
