@@ -363,17 +363,22 @@ button:focus-visible {
 .signature {
     position: relative;
     top: -0.2em;
+    padding-left: 8%;
     color: var(--rust);
     font-family: 'Kalam', cursive;
     font-style: italic;
     font-weight: 700;
-    font-size: 1.15em;
+    font-size: 1em;
+    text-align: center;
+    text-indent: 0, right;
 }
 
 .signature span {
     display: block;
     color: var(--ink);
     font-size: 0.85em;
+    font-style: normal;
+    font-weight: 400;
 }
 
 /* ---------- CAPAS DE COURO ---------- */
