@@ -45,7 +45,6 @@
     const paginas = [];   // artigos prontos (ou páginas inteiras vindas do HTML)
     let artigo = null;
     let conteudo = null;
-    let dataPendente = null;
 
     function novaPagina() {
       artigo = document.createElement('article');
@@ -81,6 +80,21 @@
       conteudo.removeChild(no);
       if (conteudo.childNodes.length) { fechar(); novaPagina(); }
       conteudo.appendChild(no);           // sozinho na página: fica, mesmo que sobre
+    }
+
+    function colocarData(modelo) {
+      if (!artigo) novaPagina();
+      const data = modelo.cloneNode(true);
+      conteudo.appendChild(data);
+
+      const lineHeight = parseFloat(getComputedStyle(conteudo).lineHeight);
+      const espacoRestante = conteudo.clientHeight - data.offsetTop - data.offsetHeight;
+      if (espacoRestante >= lineHeight * 2) return;
+
+      conteudo.removeChild(data);
+      if (conteudo.childNodes.length) fechar();
+      if (!artigo) novaPagina();
+      conteudo.appendChild(data);
     }
 
     function colocarParagrafo(modelo) {
@@ -149,12 +163,6 @@
       let inicio = 0;
       while (inicio < total) {
         if (!artigo) novaPagina();
-        let dataDaPagina = null;
-        if (dataPendente && !conteudo.childNodes.length) {
-          dataDaPagina = dataPendente;
-          conteudo.appendChild(dataDaPagina);
-          dataPendente = null;
-        }
 
         let p = fragmento(inicio, total);
         conteudo.appendChild(p);
@@ -176,17 +184,9 @@
 
         if (!cabe()) {
           conteudo.removeChild(p);
-          if (dataDaPagina) {
-            conteudo.removeChild(dataDaPagina);
-            dataPendente = dataDaPagina;
-          }
           if (conteudo.childNodes.length) {
             fechar();
             continue;
-          }
-          if (dataDaPagina) {
-            conteudo.appendChild(dataDaPagina);
-            dataPendente = null;
           }
           conteudo.appendChild(fragmento(inicio, inicio + 1));
           inicio += 1;
@@ -230,15 +230,13 @@
       } else if (el.matches('hr, .quebra')) {
         fechar();
       } else if (el.classList.contains('entry-date')) {
-        fechar();
-        dataPendente = el.cloneNode(true);
+        colocarData(el);
       } else if (el.tagName === 'P') {
         colocarParagrafo(el);
       } else {
         colocarBloco(el.cloneNode(true));
       }
     });
-    if (dataPendente) colocarBloco(dataPendente);
     fechar();
     document.body.removeChild(palco);
 
