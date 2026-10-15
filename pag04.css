@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap');
+
 @font-face {
     font-family:'chineserock' ;
     src: url(fontes/chinese\ rocks\ rg.otf);
@@ -78,8 +80,8 @@ button:focus-visible {
 .book {
     --u: calc(var(--pw) / 100);
     /* tamanhos do texto (modo duas páginas) */
-    --fs: 4.3;       /* letra do diário */
-    --lhm: 6.2;      /* altura de cada linha do caderno */
+    --fs: 6.5;       /* letra do diário */
+    --lhm: 8.5;      /* altura de cada linha do caderno */
     --h2: 6.4;       /* títulos */
     --meta: 2.4;     /* datas e números de página */
     --lh: calc(var(--u) * var(--lhm));
@@ -95,8 +97,8 @@ button:focus-visible {
 
 /* celular: uma página por vez, letra um pouco maior */
 .book[data-mode='single'] {
-    --fs: 5.2;
-    --lhm: 7.4;
+    --fs: 8;
+    --lhm: 10.5;
     --h2: 7.4;
     --meta: 2.9;
     width: var(--pw);
@@ -276,7 +278,7 @@ button:focus-visible {
 /* Toda altura de linha é múltiplo de --lh, então o texto
    assenta exatamente em cima das linhas do caderno. */
 .journal-content {
-    font-family: 'Caveat', cursive;
+    font-family: 'Tangerine', cursive;
     font-size: calc(var(--u) * var(--fs));
     line-height: var(--lh);
     background-image: linear-gradient(to bottom, transparent calc(100% - 1px), var(--rule) calc(100% - 1px));
