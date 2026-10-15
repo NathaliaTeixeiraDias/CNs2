@@ -80,9 +80,9 @@ button:focus-visible {
 .book {
     --u: calc(var(--pw) / 100);
     /* tamanhos do texto (modo duas páginas) */
-    --fs: 6.5;       /* letra do diário */
+    --fs: 4.5;       /* letra do diário */
     --lhm: 8.5;      /* altura de cada linha do caderno */
-    --h2: 6.4;       /* títulos */
+    --h2: ;       /* títulos */
     --meta: 2.4;     /* datas e números de página */
     --lh: calc(var(--u) * var(--lhm));
 

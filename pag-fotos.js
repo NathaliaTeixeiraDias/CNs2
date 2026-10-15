@@ -249,7 +249,7 @@ if (document.fonts && document.fonts.load) document.fonts.load('20px Rye');
           '<div class="foto"><img alt="" draggable="false"><canvas class="raspa"></canvas></div>' +
           '<div class="rotulo">raspe aqui</div>' +
         '</div>' +
-        '<div class="face verso"><p></p><span class="ast">✳</span></div>' +
+        '<div class="face verso"><p></p><span class="ast">ˋˏ♡ˎˊ</span></div>' +
       '</div>';
 
     const img = p.querySelector('img');

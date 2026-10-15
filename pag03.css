@@ -117,7 +117,6 @@ html, body {
   color: var(--ouro);
 }
 
-/* ---------- botão "Continuar": placa de latão ---------- */
 /* ---------- botão "Continuar": contorno fino dourado ---------- */
 #continuar {
   pointer-events: auto;
@@ -304,11 +303,6 @@ html, body {
   75%      { transform: translate(-2px, -1px); }
 }
 
-/* ---------- MESA (tampo de madeira de saloon) ----------
-   1) Apague o bloco  #mesa { ... }  do seu CSS
-   2) Apague também o  #mesa::before { ... }  se você colou a versão anterior
-   3) Cole este bloco no lugar.
-   A borda do balcão agora faz parte do fundo da mesa (fica sempre no topo). */
 #mesa {
   position: absolute;
   left: 0;
