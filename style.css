@@ -223,3 +223,10 @@ main.revelado {
 #botao-olho:hover {
   opacity: 3;
 }
+@media (max-width: 600px) {
+    .titulo {
+        font-size: 9vw;          /* ~32px num celular de 360px de largura */
+        padding: 0 12px;
+        overflow-wrap: anywhere; /* se ainda assim não couber, quebra em vez de cortar */
+    }
+}
