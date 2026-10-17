@@ -8,12 +8,12 @@ if (document.fonts && document.fonts.load) document.fonts.load('20px Rye');
   const PROXIMA_PAGINA = 'pag04.html';
 
   const FOTOS = [
-    { src: 'imagens/Miss-im.jpg', legenda: 'Modo "fome" ativado.' },
-    { frase: 'A distância é só um detalhe. Eu escolho você de qualquer lugar.', legenda: 'Verso opcional: pode deixar vazio.' },
+    { src: 'imagens/Miss-im.jpg', legenda: 'Eu todos os dias pensando em você.' },
+    { frase: 'Você é a resposta mais linda das minhas orações.', legenda: 'Verso opcional: pode deixar vazio.' },
     { frase: 'Você é o meu valentine', legenda: 'Verso opcional: pode deixar vazio.' },
     { src: 'imagens/pink.jpg', legenda: 'E é verdade, viu?' },
-    { src: 'fontes/catred.jpg', legenda: 'Passa seu coração, agora!!.' },
-    { frase: 'Apesar de você estar longe dos meus olhos, você nunca está longe dos meus pensamentos e do meu coração.' }
+    { src: 'fontes/catred.jpg', legenda: 'Passa seu coração, gatinho.' },
+    { frase: 'Seus olhos são como noites estreladas.', legenda: 'Verso opcional: pode deixar vazio.' }
   ];
 
   // Velocidade dos alvos, em pixels por segundo: 
