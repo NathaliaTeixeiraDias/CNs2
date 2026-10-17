@@ -215,3 +215,61 @@ header {
 @media (max-width: 480px) {
   #btn { padding: 15px 30px; font-size: 0.95rem; letter-spacing: 0.16em; }
 }
+/* ---------- frases piscando ---------- */
+.frase-amor {
+  animation:
+    flutuar 5s ease-in-out var(--atraso) infinite,
+    aparecer 0.8s ease var(--atraso) forwards,
+    piscar 2.6s ease-in-out calc(var(--atraso) + 0.8s) infinite;
+}
+
+/* durações diferentes, pra elas não piscarem todas no mesmo ritmo */
+.frase-amor:nth-child(3n)   { animation-duration: 5s, 0.8s, 3.4s; }
+.frase-amor:nth-child(3n+1) { animation-duration: 5s, 0.8s, 2.2s; }
+
+@keyframes piscar {
+  0%, 100% { opacity: 0.45; text-shadow: 0 0 6px rgba(245, 190, 8, 0.678); }
+  50%      { opacity: 1;    text-shadow: 0 0 16px rgba(255, 214, 120, 0.95); }
+}
+/* ---------- "toque para continuar": borda giratória ---------- */
+#btn-continuar {
+  padding: 12px 34px;
+  border-radius: 999px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* camada que gira: um quadrado grande com um rastro dourado */
+#btn-continuar::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 220%;
+  aspect-ratio: 1;
+  z-index: -2;
+  background:
+    conic-gradient(from 0deg,
+      transparent 0deg, transparent 240deg,
+      rgba(212, 175, 55, 0.35) 290deg,
+      #d4af37 335deg,
+      #fff1b8 356deg,
+      transparent 360deg),
+    rgba(212, 175, 55, 0.28);
+  transform: translate(-50%, -50%) rotate(0deg);
+  animation: borda-giro 3s linear infinite;
+}
+
+/* miolo escuro: cobre o centro e deixa só uma fina borda aparecendo */
+#btn-continuar::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  z-index: -1;
+  border-radius: inherit;
+  background: #0b0604;
+}
+
+@keyframes borda-giro {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
