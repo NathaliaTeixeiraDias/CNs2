@@ -154,3 +154,64 @@ header {
 @keyframes pulsar-texto {
   50% { text-shadow: 0 0 18px rgba(212, 175, 55, .95); }
 }
+/* ---------- botão "Pressione aqui": mais vivo ---------- */
+#btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 40px;
+  font-size: 1rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #fff4d6;
+  text-shadow: 0 0 10px rgba(255, 214, 120, 0.8);
+  background:
+    linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.38) 50%, transparent 65%) 100% 0 / 250% 100% no-repeat,
+    linear-gradient(180deg, rgba(199, 89, 89, 0.92), rgba(70, 10, 12, 0.95));
+  border: 2px solid #f2c14e;
+  border-radius: 999px;
+  backdrop-filter: blur(3px);
+  animation: btn-brilho 3.2s ease-in-out infinite, btn-pulso 2.4s ease-in-out infinite;
+  transition: opacity 0.6s, transform 0.2s, filter 0.2s;
+}
+
+/* o coraçãozinho antes do texto */
+#btn::before {
+  content: "♥";
+  color: #df8588ec;
+  font-size: 1.15em;
+  text-shadow: 0 0 10px rgba(255, 90, 95, 0.9);
+}
+
+/* o anel que expande e some */
+#btn::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border: 2px solid rgba(242, 193, 78, 0.8);
+  border-radius: 999px;
+  pointer-events: none;
+  animation: btn-anel 2.4s ease-out infinite;
+}
+
+#btn:hover  { filter: brightness(1.12); transform: translateX(-50%) scale(1.04); }
+#btn:active { transform: translateX(-50%) scale(0.97); }
+
+@keyframes btn-brilho {
+  0%, 55% { background-position: 100% 0, 0 0; }
+  100%    { background-position: 0% 0, 0 0; }
+}
+
+@keyframes btn-pulso {
+  0%, 100% { box-shadow: 0 0 18px rgba(242, 193, 78, 0.45), inset 0 0 12px rgba(255, 214, 120, 0.2); }
+  50%      { box-shadow: 0 0 34px rgba(242, 193, 78, 0.9),  inset 0 0 18px rgba(255, 214, 120, 0.4); }
+}
+
+@keyframes btn-anel {
+  0%   { transform: scale(1);        opacity: 0.8; }
+  100% { transform: scale(1.35, 1.7); opacity: 0; }
+}
+
+@media (max-width: 480px) {
+  #btn { padding: 15px 30px; font-size: 0.95rem; letter-spacing: 0.16em; }
+}
