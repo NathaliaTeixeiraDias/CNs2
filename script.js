@@ -10,11 +10,7 @@ let fotoRevelada = false;
 
 let jaRevelado = false;
 
-// "timeupdate" dispara vários vezes por segundo, com o tempo real
-// de reprodução do vídeo (video.currentTime) — isso é mais confiável
-// do que usar um setTimeout contando "5 segundos" no relógio do
-// JavaScript, porque o vídeo pode demorar um pouco pra começar a
-// tocar de verdade (principalmente no celular).
+
 video.addEventListener("timeupdate", () => {
 
   // --- o tiro, que revela a página de entrada ---
@@ -83,8 +79,7 @@ const botaoOlho = document.getElementById("botao-olho");
 botaoOlho.addEventListener("click", () => {
   const escondida = campoSenha.type === "password";
 
-  // alterna o "type" do input: "text" mostra os caracteres,
-  // "password" volta a trocar tudo por bolinhas
+ 
   campoSenha.type = escondida ? "text" : "password";
   botaoOlho.textContent = escondida ? "🙈" : "👁";
   botaoOlho.setAttribute("aria-label", escondida ? "Esconder senha" : "Mostrar senha");
