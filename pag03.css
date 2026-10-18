@@ -119,6 +119,7 @@ html, body {
 
 /* ---------- botão "Continuar": contorno fino dourado ---------- */
 #continuar {
+  --fundo-continuar: rgba(20, 8, 4, 0.55);
   pointer-events: auto;
   display: inline-flex;
   align-items: center;
@@ -131,12 +132,16 @@ html, body {
   text-transform: uppercase;
   text-decoration: none;
   color: var(--ouro);
-  background: rgba(20, 8, 4, 0.55);
-  border: 1px solid rgba(242, 193, 78, 0.75);
+  background:
+    linear-gradient(var(--fundo-continuar), var(--fundo-continuar)) padding-box,
+    linear-gradient(90deg, rgba(242, 193, 78, 0.2), var(--ouro), rgba(242, 193, 78, 0.2)) border-box;
+  background-size: 100% 100%, 200% 100%;
+  background-position: 0 0, 0 0;
+  border: 1px solid transparent;
   border-radius: 999px;
   cursor: pointer;
-  animation: respirar 2.6s ease-in-out infinite;
-  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  animation: respirar 2.6s ease-in-out infinite, borda-andando 2.4s linear infinite;
+  transition: color 0.25s ease;
 }
 
 #continuar::after {
@@ -146,9 +151,8 @@ html, body {
 }
 
 #continuar:hover {
-  background: var(--ouro);
+  --fundo-continuar: var(--ouro);
   color: #2a0f08;
-  border-color: var(--ouro);
 }
 
 #continuar:hover::after { transform: translateX(4px); }
@@ -156,6 +160,10 @@ html, body {
 @keyframes respirar {
   0%, 100% { box-shadow: 0 0 0 rgba(242, 193, 78, 0), inset 0 0 0 rgba(242, 193, 78, 0); }
   50%      { box-shadow: 0 0 18px rgba(242, 193, 78, 0.35), inset 0 0 10px rgba(242, 193, 78, 0.12); }
+}
+
+@keyframes borda-andando {
+  to { background-position: 0 0, 100% 0; }
 }
 
 #continuar::after {
@@ -470,6 +478,7 @@ canvas.raspa.limpo { opacity: 0; pointer-events: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .botao { animation: none; }
+  #continuar { animation: none; }
   #cena.tremor { animation: none; }
 }
 

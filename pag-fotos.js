@@ -8,7 +8,7 @@ if (document.fonts && document.fonts.load) document.fonts.load('20px Rye');
   const PROXIMA_PAGINA = 'pag04.html';
 
   const FOTOS = [
-    { src: 'imagens/Miss-im.jpg', legenda: 'Eu todos os dias pensando em você.' },
+    { src: 'imagens/Miss-im.jpg', legenda: 'Eu todos os dias pensando em você longe de mim.' },
     { frase: 'Você é a resposta mais linda das minhas orações.', legenda: 'Verso opcional: pode deixar vazio.' },
     { frase: 'Você é o meu valentine', legenda: 'Verso opcional: pode deixar vazio.' },
     { src: 'imagens/pink.jpg', legenda: 'E é verdade, viu?' },
@@ -261,7 +261,7 @@ if (document.fonts && document.fonts.load) document.fonts.load('20px Rye');
       const texto = document.createElement('p');
       texto.textContent = f.frase;
       const n = f.frase.length;
-      cartao.style.setProperty('--fs', n < 30 ? 0.15 : n < 55 ? 0.115 : n < 80 ? 0.095 : 0.08);
+      cartao.style.setProperty('--fs', n < 30 ? 0.17 : n < 55 ? 0.13 : n < 80 ? 0.11 : 0.095);
       cartao.appendChild(texto);
       img.replaceWith(cartao);
     } else {
@@ -370,7 +370,7 @@ if (document.fonts && document.fonts.load) document.fonts.load('20px Rye');
         pronto = true;
         canvas.classList.add('limpo');
         p.classList.add('revelada');
-        p.querySelector('.rotulo').textContent = p.classList.contains('so-frase') ? '' : 'toque para virar';
+        p.querySelector('.rotulo').textContent = p.classList.contains('so-frase') ? '˗ˋˏ♡ˎˊ˗' : 'toque para virar';
         revelados++;
         if (revelados === N) {
           if (sub) sub.textContent = 'Só lembrança boa. Pode seguir, cowboy.';
