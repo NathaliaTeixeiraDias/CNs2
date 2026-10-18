@@ -38,6 +38,7 @@
 
 @media (prefers-reduced-motion: reduce) {
     :root { --dur: 1ms; }
+    .back-caption { animation: none; }
 }
 
 html,
@@ -448,6 +449,21 @@ button:focus-visible {
     letter-spacing: 0.12em;
     line-height: 1.7;
     text-transform: uppercase;
+    animation: back-caption-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes back-caption-pulse {
+    0%, 100% {
+        opacity: 1;
+        text-shadow:
+            0 0 10px rgba(255, 235, 180, 0.9),
+            0 0 22px rgba(243, 198, 105, 0.65);
+    }
+
+    50% {
+        opacity: 0.6;
+        text-shadow: 0 0 5px rgba(243, 218, 160, 0.4);
+    }
 }
 
 /* ---------- LINGUETA DE COURO ---------- */

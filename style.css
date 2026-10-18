@@ -142,17 +142,64 @@ main.revelado {
   background: rgba(20, 12, 6, .55);
   border: 2px solid var(--areia);
   color: var(--areia);
-  font-family: 'Rye', serif;
-  font-size: 16px;
+  font-family: 'hapnab', serif;
+  font-size: 18px;
   letter-spacing: .08em;
   cursor: pointer;
   transition: background .25s, color .25s;
+}
+
+.botao-iluminado {
+  position: relative;
+  isolation: isolate;
+  border-color: transparent;
+}
+
+.botao-iluminado::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--angulo-borda),
+    transparent 0 72%,
+    #fff2b0 82%,
+    #ffb52e 88%,
+    transparent 96% 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: brilho-borda 2.4s linear infinite;
+}
+
+.botao-iluminado:hover {
+  border-color: transparent;
+}
+
+@property --angulo-borda {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes brilho-borda {
+  to {
+    --angulo-borda: 360deg;
+  }
 }
 
 .botao:hover {
   background: var(--vermelho-poeira);
   border-color: var(--vermelho-poeira);
   color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .botao-iluminado::before {
+    animation: none;
+  }
 }
 
 #btn-entrar.escondido {
