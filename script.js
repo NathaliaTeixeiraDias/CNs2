@@ -46,7 +46,7 @@ btnEntrar.addEventListener("click", () => {
 // ---------- logins e senhas aceitos ----------
 // Pode colocar quantos quiser em cada lista.
 // Maiúsculas, espaços nas pontas e acentos são ignorados.
-const LOGINS_CORRETOS = ["Carlos Eduardo", "carlos eduardo", "cadu", "Cadu"];
+const LOGINS_CORRETOS = ["Carlos Eduardo", "carlos eduardo", "cadu", "Cadu", "CarlosEduardo", "carloseduardo"];
 const SENHAS_CORRETAS = ["25", "vinte e cinco", "25 anos"];
 
 const campoLogin = document.getElementById("campo-login");
