@@ -391,6 +391,12 @@ button:focus-visible {
     text-indent: 0, right;
 }
 
+.journal-content p.love-declaration {
+    margin-top: calc(var(--lh) * 2);
+    text-align: center;
+    text-indent: 0;
+}
+
 .signature span {
     display: block;
     color: var(--ink);

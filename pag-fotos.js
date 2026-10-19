@@ -12,7 +12,7 @@ if (document.fonts && document.fonts.load) document.fonts.load('20px Rye');
     { frase: 'Você é a resposta mais linda das minhas orações.', legenda: 'Verso opcional: pode deixar vazio.' },
     { frase: 'Você é o meu valentine', legenda: 'Verso opcional: pode deixar vazio.' },
     { src: 'imagens/pink.jpg', legenda: 'E é verdade, viu?' },
-    { src: 'fontes/catred.jpg', legenda: 'Isso é um assalta! Passa seu coração, gatinho.' },
+    { src: 'fontes/catred.jpg', legenda: 'Isso é um assalto! Passa seu coração, gatinho.' },
     { frase: 'Seus olhos são tão lindos como noites estreladas.', legenda: 'Verso opcional: pode deixar vazio.' }
   ];
 
